@@ -13,16 +13,40 @@ module StreamAnalytics
 
       json({
         channel_name: video['snippet']['channelTitle'],
-        stream_id: video['liveStreamingDetails']['activeLiveChatId'],
+        live_chat_id: video['liveStreamingDetails']['activeLiveChatId'],
         stream_name: video['snippet']['title']
       })
     end
 
     get '/analytics' do
+      messages = youtube_api('liveChat/messages', { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' })
+
+      messages = messages['items'].map do |message|
+        {
+          author: message['authorDetails']['displayName'],
+          content: message['snippet']['textMessageDetails']['messageText'],
+          timestamp: message['snippet']['publishedAt']
+        }
+      end
+
+      users = messages.each_with_object(Hash.new(0)) do |message, counter|
+        counter[message[:author]] += 1
+      end.sort_by { |name, count| count }
+        .reverse.map do |name, count|
+        { content: name, count: count }
+      end
+
+      words = messages
+        .map { |m| m[:content].downcase }
+        .map { |c| c.split(' ') }.flatten
+        .group_by { |n| n }.values
+        .sort { |a, b| b.length <=> a.length }
+        .map { |a| { content: a[0], count: a.length } }
+
       json({
-        messages: [],
-        users: [ { count: 100, content: 'Alice' } ],
-        words: [ { count: 100, name: 'cool' } ]
+        messages: messages,
+        users: users,
+        words: words
       })
     end
 
