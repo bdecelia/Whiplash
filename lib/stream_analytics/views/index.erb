@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <script src="javascripts/jquery-1.5.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.post("greeting", {
+                    salutation: "Howdy",
+                    name: "Friend"
+                },
+                function(result) {
+                    $("#greeting").html(result);
+                });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Sinatra Ajax Demo using jQuery</h1>
+    <div id="greeting">
+        <p>Hello, World</p>
+    </div>
+</body>
+
+</html>
