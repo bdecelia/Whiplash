@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'rest-client'
 
 module StreamAnalytics
   class Application < Sinatra::Application
@@ -7,10 +8,13 @@ module StreamAnalytics
     end
 
     post '/video' do
+      video = youtube_api('videos', { id: params[:id], part: 'snippet,liveStreamingDetails' })
+      video = video['items'][0]
+
       json({
-        channel_name: '',
-        stream_id: '',
-        stream_name: ''
+        channel_name: video['snippet']['channelTitle'],
+        stream_id: video['liveStreamingDetails']['activeLiveChatId'],
+        stream_name: video['snippet']['title']
       })
     end
 
@@ -24,9 +28,22 @@ module StreamAnalytics
 
     private
 
+    def api_key
+      ENV['YOUTUBE_API_KEY']
+    end
+
     def json(data)
       content_type 'application/json'
       JSON.dump(data)
+    end
+
+    def youtube_api(path, params)
+      JSON.parse(
+        RestClient.get(
+         "https://content.googleapis.com/youtube/v3/#{path}",
+         { params: params.merge({ key: api_key }) }
+        )
+      )
     end
   end
 end
