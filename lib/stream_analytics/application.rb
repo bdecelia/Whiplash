@@ -4,7 +4,7 @@ require 'rest-client'
 module StreamAnalytics
   class Application < Sinatra::Application
     get '/' do
-      'hi'
+      erb :index
     end
 
     post '/video' do
