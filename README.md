@@ -3,7 +3,6 @@
 A small Sinatra application to show relevant analytics/metrics about a
 YouTube livestream.
 
-
 ### Development
 
 Run the following commands to boot the application. This assumes you
