@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'foreman'
+gem 'puma'
 gem 'rest-client'
 gem 'sinatra'
 
