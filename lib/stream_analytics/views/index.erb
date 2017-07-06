@@ -1,23 +1,79 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>LiveStream Analysis</title>
+
+    <!-- Bootstrap & JQuery -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <h1>Youtube LiveStream Analysis</h1>
-    <p id="p"> Hello World </p>
-    <button id='show'>Show</button>
-    <button id='hide'>Hide</button>
-    <script>
-        $("#hide").click(function(){
-            $("#p").hide();
-        });
+    <!-- Navigation -->
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        $("#show").click(function(){
-            $("#p").show();
-        });
-    </script>
+        <a class="navbar-brand" href="#">Navbar</a>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Features</a>
+                <a class="nav-item nav-link" href="#">Pricing</a>
+                <a class="nav-item nav-link disabled" href="#">Disabled</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+
+    <div class="container" style="padding-top:2%;">
+        <div class="row">
+
+            <!-- Graph Container -->
+            <div id="graph_container" class="col-md-6">
+                <h2>Graph Space</h2>
+            </div>
+
+            <!-- Options and Output -->
+            <div class="col-md-6">
+                <div class="row">
+
+                    <!-- Option Menu 1 -->
+                    <div id="menu_1" class="col-md-6">
+                        <h2>Menu 1</h2>
+                    </div>
+                    
+                    <!-- Option Menu 2 -->
+                    <div id="menu_2" class="col-md-6">
+                        <h2>Menu 2</h2>
+                    </div>
+                </div>
+
+                <!-- Output Box -->
+                <div class="row" style="padding-top:2%;">
+                    <div class="col-md-8 offset-md-2">
+                        <h2>Output Box</h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <hr>
+
+        <footer>
+            <p>&copy; 2016 Vox Media, Inc.</p>
+        </footer>
+    </div>
 </body>
 
 </html>
