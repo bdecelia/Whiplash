@@ -1,23 +1,20 @@
-html,body
+/* html,body
 {
     height: 100%;
     width: 100%;
     margin: 0px;
-    padding: 0px;
+    padding: 0px;  
     overflow-x: hidden; 
-}
+} */
 
 .container{
     height:100%;
-    width:100%;
-    padding-top:2%;
+    margin: 2%;
+    width:96%;
 }
 
 #graph_container{
     height: 406px;
-    width: auto;
-    margin: 1%;
     border: .2rem solid black;
-    padding: 0px;
     background-color: rgba(67, 162, 214, .25)
 }
