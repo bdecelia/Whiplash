@@ -19,6 +19,5 @@ html,body
     margin: 1%;
     border: .2rem solid black;
     padding: 0px;
-    background-color: teal;
-    opacity: .15;
+    background-color: rgba(67, 162, 214, .25)
 }
