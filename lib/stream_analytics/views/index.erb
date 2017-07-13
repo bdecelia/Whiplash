@@ -5,9 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap & JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel = "stylesheet" type = "text/css" href = "/assets/style.css" />
     <title>LiveStream Analysis</title>
 </head>
@@ -39,6 +41,7 @@
             <div id="graph_container" class="col-md-9">
                 <h2 style="width: 800px;max-height: 50vh;max-width: 89vw;text-align:center;">Graph</h2>
                 <div id="graph"></div>
+                <%= erb :word_graph %>
             </div>
 
             <!-- Options and Output -->
@@ -49,7 +52,7 @@
                     <div id="menu_1" class="col-md-6">
                         <h2>Menu 1</h2>
                     </div>
-                    
+
                     <!-- Option Menu 2 -->
                     <div id="menu_2" class="col-md-6">
                         <h2>Menu 2</h2>
