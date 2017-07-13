@@ -1,34 +1,10 @@
 html,body
 {
     height: 100vh!important;
-    width: 10vw!important;
+    width: 100vw!important;
     margin: 0px;
     padding: 0px;
     overflow-x: hidden; 
-}
-
-#footer{
-    height:6%;
-    width:100%;
-    position: fixed;
-    bottom:0;
-    border-top: solid 1px black;
-    background-color: lightgray;
-    text-align: center;
-}
-
-#footer>p{
-    padding-top: .7rem;
-}
-
-#graph{
-    height: 450px;
-    width: 800px;
-    max-height: 50vh;
-    max-width: 89vw;
-    background-color: teal;
-    opacity: .7;
-    border: 2px solid black;
 }
 
 .container{
@@ -39,8 +15,26 @@ html,body
     padding-top:2%;
 }
 
-@media screen and (max-width: 1124px) {
-    body {
-        background-color: lightblue;
-    }
+#graph{
+    height: auto;
+    width: 800px;
+    max-height: 50vh;
+    max-width: 89vw;
+    background-color: teal;
+    opacity: .7;
+    border: 2px solid black;
 }
+
+/* #footer{
+    height:6%;
+    width:100%;
+    position: fixed;
+    bottom:0;
+    border-top: solid 1px black;
+    background-color: lightgray;
+    text-align: center;
+} 
+
+#footer>p{
+    padding-top: .7rem;
+} */
