@@ -4,14 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
     <!-- Bootstrap & JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel = "stylesheet" type = "text/css" href = "/assets/style.css" />
-    <title>LiveStream Analysis</title>
+
+    <title>Youtube LiveStream Analysis</title>
 </head>
 
 <body>
@@ -37,38 +38,17 @@
     <div class="container">
         <div class="row" style="width:100%;height:100%;text-align:center;">
 
-            <!-- Graph Container -->
-            <div id="graph_container" class="col-md-9">
+            <!-- Graph Container TODO: add tabs for multiple graphs-->
+            <div id="graph_container" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 <%= erb :word_graph %>
+                <%# erb :line_graph %>
+                <%# erb :pie_graph %>
+                <%# erb :phrase_graph %>
             </div>
 
-            <!-- Options and Output -->
-            <div class="col-md-3">
-                <div class="row">
-
-                    <!-- Option Menu 1 -->
-                    <div id="menu_1" class="col-md-6">
-                        <h2>Menu 1</h2>
-                    </div>
-
-                    <!-- Option Menu 2 -->
-                    <div id="menu_2" class="col-md-6">
-                        <h2>Menu 2</h2>
-                    </div>
-                </div>
-
-                <!-- Output Box -->
-                <div class="row" style="padding-top:2%;">
-                    <div class="col-md-8 offset-md-2">
-                        <h2>Output Box</h2>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-    <%# <div id="footer">
-        <p>&copy; 2016 Vox Media, Inc.</p>
-    </div> %>
+
 </body>
 
 </html>

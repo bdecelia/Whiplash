@@ -1,7 +1,7 @@
 html,body
 {
-    height: 100vh!important;
-    width: 100vw!important;
+    height: 100%;
+    width: 100%;
     margin: 0px;
     padding: 0px;
     overflow-x: hidden; 
@@ -10,31 +10,15 @@ html,body
 .container{
     height:100%;
     width:100%;
-    margin-left:1%;
-    margin-bottom:100px;
     padding-top:2%;
 }
 
-#graph{
-    height: auto;
-    width: 800px;
-    max-height: 50vh;
-    max-width: 89vw;
+#graph_container{
+    height: 406px;
+    width: auto;
+    margin: 1%;
+    border: .2rem solid black;
+    padding: 0px;
     background-color: teal;
-    opacity: .7;
-    border: 2px solid black;
+    opacity: .15;
 }
-
-/* #footer{
-    height:6%;
-    width:100%;
-    position: fixed;
-    bottom:0;
-    border-top: solid 1px black;
-    background-color: lightgray;
-    text-align: center;
-} 
-
-#footer>p{
-    padding-top: .7rem;
-} */
