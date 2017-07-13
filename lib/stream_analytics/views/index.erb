@@ -4,16 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>LiveStream Analysis</title>
-
-    <!-- Bootstrap & JQuery -->
+    <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <link rel = "stylesheet" type = "text/css" href = "/assets/style.css" />
+    <title>LiveStream Analysis</title>
 </head>
 
 <body>
@@ -36,17 +32,17 @@
 </nav>
 
     <!-- Main Layout -->
-
-    <div class="container" style="padding-top:2%;">
-        <div class="row">
+    <div class="container">
+        <div class="row" style="width:100%;height:100%;text-align:center;">
 
             <!-- Graph Container -->
-            <div id="graph_container" class="col-md-6">
-                <h2>Graph Space</h2>
+            <div id="graph_container" class="col-md-9">
+                <h2 style="width: 800px;max-height: 50vh;max-width: 89vw;text-align:center;">Graph</h2>
+                <div id="graph"></div>
             </div>
 
             <!-- Options and Output -->
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="row">
 
                     <!-- Option Menu 1 -->
@@ -66,13 +62,11 @@
                         <h2>Output Box</h2>
                     </div>
                 </div>
-
             </div>
         </div>
-
-        <div id="footer">
-            <p>&copy; 2016 Vox Media, Inc.</p>
-        </div>
+    </div>
+    <div id="footer">
+        <p>&copy; 2016 Vox Media, Inc.</p>
     </div>
 </body>
 
