@@ -19,14 +19,38 @@ module StreamAnalytics
     end
 
     get '/analytics' do
-      messages = youtube_api('liveChat/messages', { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' })
+      next_page_token = ''
+      page_count = 1
+      messages = []
+      api_params = { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' }
 
-      messages = messages['items'].map do |message|
-        {
-          author: message['authorDetails']['displayName'],
-          content: message['snippet']['textMessageDetails']['messageText'],
-          timestamp: message['snippet']['publishedAt']
-        }
+      loop do
+        break if page_count == 5
+
+        if next_page_token && !next_page_token.empty?
+          api_params[:pageToken] = next_page_token
+        end
+
+        messages_api = youtube_api('liveChat/messages', api_params)
+        break if messages_api['pageInfo']['totalResults'] == 0
+
+        messages = messages_api['items'].map do |message|
+          {
+            author: message['authorDetails']['displayName'],
+            content: message['snippet']['textMessageDetails']['messageText'],
+            timestamp: message['snippet']['publishedAt']
+          }
+        end.concat(messages)
+
+        next_page_token = messages_api['nextPageToken']
+        break if !next_page_token || next_page_token.empty?
+        puts "NPT: #{next_page_token}"
+
+        puts "ENTERING SLEEP #{messages_api['pollingIntervalMillis']}"
+        sleep (messages_api['pollingIntervalMillis'] / 100)
+        puts "EXITING SLEEP"
+
+        page_count += 1
       end
 
       users = messages.each_with_object(Hash.new(0)) do |message, counter|
