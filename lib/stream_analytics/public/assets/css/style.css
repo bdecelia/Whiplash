@@ -1,0 +1,31 @@
+body{
+    color: #000;
+}
+
+#chat_img{
+    width: 100%;
+    height: 100%
+}
+#chat_container{
+    width: 100%;
+    height: 500px;
+    background-color: green;
+}
+
+input{
+    margin-top: .5rem;
+}
+
+.container{
+    height:100%;
+    margin: 2%;
+    width:96%;
+}
+
+#footer>p{
+    padding-top: 3px;
+}
+
+li {
+  list-style-type: none;
+}
