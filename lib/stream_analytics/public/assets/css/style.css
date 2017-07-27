@@ -22,11 +22,6 @@ input{
     width:96%;
 }
 
-#graph_container{
-    height: 406px;
-    border: .2rem solid black;
-    background-color: rgba(67, 162, 214, .25)
-}
 #footer>p{
     padding-top: 3px;
 }
