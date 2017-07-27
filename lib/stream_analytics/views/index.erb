@@ -19,55 +19,45 @@
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-light navbar-toggleable-sm bg-faded justify-content-center">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a href="/" class="navbar-brand d-flex w-50 mr-auto">Polygon</a>
-    <div class="navbar-collapse collapse" id="collapsingNavbar3">
-        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Index</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Help</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a href="/" class="navbar-brand d-flex w-50 mr-auto">Polygon</a>
+        <div class="navbar-collapse collapse" id="collapsingNavbar3">
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Index</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Help</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <!-- Main Layout -->
-
     <div class="container" style="padding-top:2%;">
         <div class="row">
-
             <!-- Graph Container -->
-            <div id="graph_container" class="col-md-6">
-                <h2>Graph Space</h2>
+            <div id="graph_container" class="col-sm-6 col-lg-6 col-xl-6">
                 <%= erb :word_graph %>
             </div>
 
-            <!-- Options and Output -->
-            <div class="col-md-6">
-                <div class="row">
+            <!-- Chat Goes Here -->
+            <div class="col-sm-6 col-lg-6 col-xl-6">
+                <%= erb :chat %>
+            </div>
+        </div>
 
-                    <!-- Option Menu 1 -->
-                    <div id="menu_1" class="col-md-6">
-                        <h2>Menu 1</h2>
-                    </div>
+        <div class="row">
+            <!-- Stream Options Menu -->
+            <div id="menu_container" class="col-sm-6 col-lg-6 col-xl-6">
+                <%= erb :stream_options %>
+            </div>
 
-                    <!-- Option Menu 2 -->
-                    <div id="menu_2" class="col-md-6">
-                        <h2>Menu 2</h2>
-                    </div>
-                </div>
-
-                <!-- Output Box -->
-                <div class="row" style="padding-top:2%;">
-                    <div class="col-md-8 offset-md-2">
-                        <h2>Output Box</h2>
-                    </div>
-                </div>
-
+            <!-- Poll  -->
+            <div id="menu_container" class="col-sm-6 col-lg-6 col-xl-6">
+                <%= erb :poll %>
             </div>
         </div>
 

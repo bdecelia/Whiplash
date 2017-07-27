@@ -2,6 +2,9 @@ body{
     color: #000;
 }
 
+#streamID{
+    width: 500px;
+}
 
 #footer{
     border-top: solid 1px;
