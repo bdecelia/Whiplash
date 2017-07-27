@@ -29,3 +29,7 @@ input{
 #footer>p{
     padding-top: 3px;
 }
+
+li {
+  list-style-type: none;
+}

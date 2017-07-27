@@ -1,0 +1,35 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+  <div>
+    <form>
+      <label for="item">Add a tag: </label>
+      <input id="item" type="text" size="10">
+      <input id="submitButton" type="button" value="Add">
+    </form>
+    <div>
+      <table id="table">
+      </table>
+    </div>
+  </div>
+  <script type="text/javascript">
+    window.onload=function() {
+    var button = document.getElementById("submitButton");
+    button.onclick = addItem;
+  }
+
+  function addItem() {
+          var textInput = document.getElementById("item");  //getting text input
+          var text = textInput.value;   //getting value of text input element
+
+          $('#table').append('<tr><td>'+ text +'</td><td>0</td><td><input type="button" value="Delete" /></td></tr>');
+
+  }
+
+  $('#table').on('click', 'input[type="button"]', function () {
+      $(this).closest('tr').remove();
+  })
+
+  </script>
+</body>
