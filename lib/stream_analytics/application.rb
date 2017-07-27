@@ -4,14 +4,13 @@ require 'rest-client'
 module StreamAnalytics
   class Application < Sinatra::Application
     get '/' do
-      # JSON.parse(RestClient.post('localhost:3000/video', { id: 'fMvVr2jCQXU' }))
       erb :index
     end
 
     post '/video' do
       video = youtube_api('videos', { id: params[:id], part: 'snippet,liveStreamingDetails' })
       video = video['items'][0]
-      @live_chat_id = video['liveStreamingDetails']['activeLiveChatId']
+      live_chat_id = video['liveStreamingDetails']['activeLiveChatId']
       json({
         channel_name: video['snippet']['channelTitle'],
         live_chat_id: video['liveStreamingDetails']['activeLiveChatId'],
@@ -54,13 +53,15 @@ module StreamAnalytics
         page_count += 1
       end
 
+
+      parseTime(messages)
+
       users = messages.each_with_object(Hash.new(0)) do |message, counter|
         counter[message[:author]] += 1
       end.sort_by { |name, count| count }
         .reverse.map do |name, count|
         { content: name, count: count }
       end
-
       words = messages
         .map { |m| m[:content].downcase }
         .map { |c| c.split(' ') }.flatten
@@ -77,6 +78,15 @@ module StreamAnalytics
 
 
     private
+
+    def parseTime(messages)
+      puts "blah"
+      number_of_comments = messages.each_with_object(Hash.new(0)) do |message, counter|
+        counter[message[:timestamp]] += 1
+      end
+      puts number_of_comments
+
+    end
 
     def api_key
       ENV['YOUTUBE_API_KEY']
