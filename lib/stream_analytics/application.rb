@@ -4,13 +4,14 @@ require 'rest-client'
 module StreamAnalytics
   class Application < Sinatra::Application
     get '/' do
+      # JSON.parse(RestClient.post('localhost:3000/video', { id: 'fMvVr2jCQXU' }))
       erb :index
     end
 
     post '/video' do
       video = youtube_api('videos', { id: params[:id], part: 'snippet,liveStreamingDetails' })
       video = video['items'][0]
-
+      @live_chat_id = video['liveStreamingDetails']['activeLiveChatId']
       json({
         channel_name: video['snippet']['channelTitle'],
         live_chat_id: video['liveStreamingDetails']['activeLiveChatId'],
@@ -67,14 +68,13 @@ module StreamAnalytics
         .sort { |a, b| b.length <=> a.length }
         .map { |a| { content: a[0], count: a.length } }
 
-
-
       json({
         messages: messages,
         users: users,
         words: words
       })
     end
+
 
     private
 
