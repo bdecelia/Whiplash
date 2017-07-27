@@ -9,10 +9,8 @@
     <!-- Bootstrap & JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel = "stylesheet" type = "text/css" href = "/assets/style.css" />
 
-    <title>Youtube LiveStream Analysis</title>
+    <link rel = "stylesheet" type = "text/css" href = "/assets/css/style.css" />
 </head>
 
 <body>
@@ -35,20 +33,28 @@
     </nav>
 
     <!-- Main Layout -->
-    <div class="container">
+    <div class="container" style="padding-top:2%;">
         <div class="row">
-
-            <!-- Graph Container TODO: add tabs for multiple graphs-->
-            <div id="graph_container" class="col-lg-7">
+            <!-- Graph Container -->
+            <div id="graph_container" class="col-sm-6 col-lg-6 col-xl-6">
                 <%= erb :word_graph %>
-                <%# erb :line_graph %>
-                <%# erb :pie_graph %>
-                <%# erb :phrase_graph %>
             </div>
 
-            <div id="chatbox_container" class="col-lg-5">
-                <div id="placeholder_chat" style="background-color:darkred;height:100%;width:100%;border: .2rem solid black;">
-                <%# erb :chatbox %>
+            <!-- Chat Goes Here -->
+            <div class="col-sm-6 col-lg-6 col-xl-6">
+                <%= erb :chat %>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Stream Options Menu -->
+            <div id="menu_container" class="col-sm-6 col-lg-6 col-xl-6">
+                <%= erb :stream_options %>
+            </div>
+
+            <!-- Poll  -->
+            <div id="menu_container" class="col-sm-6 col-lg-6 col-xl-6">
+                <%= erb :poll %>
             </div>
 
         </div>

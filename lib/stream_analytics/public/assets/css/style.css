@@ -1,0 +1,40 @@
+<<<<<<< HEAD:lib/stream_analytics/public/assets/style.css
+/* html,body
+{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;  
+    overflow-x: hidden; 
+} */
+=======
+body{
+    color: #000;
+}
+
+#chat_img{
+    width: 100%;
+    height: 100%
+}
+#chat_container{
+    width: 100%;
+    height: 500px;
+    background-color: green;
+}
+
+input{
+    margin-top: .5rem;
+}
+>>>>>>> master:lib/stream_analytics/public/assets/css/style.css
+
+.container{
+    height:100%;
+    margin: 2%;
+    width:96%;
+}
+
+#graph_container{
+    height: 406px;
+    border: .2rem solid black;
+    background-color: rgba(67, 162, 214, .25)
+}
