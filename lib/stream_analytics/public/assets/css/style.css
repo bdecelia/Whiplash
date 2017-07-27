@@ -1,13 +1,3 @@
-<<<<<<< HEAD:lib/stream_analytics/public/assets/style.css
-/* html,body
-{
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;  
-    overflow-x: hidden; 
-} */
-=======
 body{
     color: #000;
 }
@@ -25,7 +15,6 @@ body{
 input{
     margin-top: .5rem;
 }
->>>>>>> master:lib/stream_analytics/public/assets/css/style.css
 
 .container{
     height:100%;
@@ -37,4 +26,11 @@ input{
     height: 406px;
     border: .2rem solid black;
     background-color: rgba(67, 162, 214, .25)
+}
+#footer>p{
+    padding-top: 3px;
+}
+
+li {
+  list-style-type: none;
 }
