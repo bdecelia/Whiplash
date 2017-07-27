@@ -18,7 +18,7 @@ module StreamAnalytics
       })
     end
 
-    get '/analytics' do
+     get '/analytics' do
       messages = youtube_api('liveChat/messages', { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' })
 
       messages = messages['items'].map do |message|
@@ -50,6 +50,18 @@ module StreamAnalytics
       })
     end
 
+
+    # get '/livedata' do
+    #   messages = youtube_api('liveChat/messages', { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails', )
+
+    #   messages = messages['items'].map do |message|
+    #     {
+    #       author: message['authorDetails']['displayName'],
+    #       content: message['snippet']['textMessageDetails']['messageText'],t
+    #       timestamp: message['snippet']['publishedAt']
+    #     }
+    #   end
+    # end
     private
 
     def api_key
@@ -69,5 +81,16 @@ module StreamAnalytics
         )
       )
     end
+    # def live(live_video_id)
+    #   url = URI.parse("http://localhost:3000/analytics?live_chat_id=" + live_video_id)
+    #   p url
+    #   req = Net::HTTP::Get.new(url.to_s)
+    #   res = Net::HTTP.start(url.host, url.port) {|http|
+    #     http.request(req)
+    #   }
+
+    #   res.body
+    #   p res.body
+    # end
   end
 end

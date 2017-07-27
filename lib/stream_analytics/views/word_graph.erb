@@ -8,11 +8,17 @@
   <script type="text/javascript">
 
   $(document).ready(function () {
+    console.log("hello world\n")
 
     //retrieve data
     $.ajax({
+
+      // url: "http://localhost:3000/analytics?live_chat_id=" + live_video_id
+
        url: 'https://jsonplaceholder.typicode.com/comments',
        success: function(data) {
+
+
          console.log('data', data)
          var email_data = []
          var id_data = []
@@ -67,6 +73,8 @@
       chart.xAxis[0].setCategories(email_data)
       chart.series[0].setData(id_data)
     }
+
+
 });
   </script>
 </body>
