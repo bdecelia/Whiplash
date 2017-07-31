@@ -12,9 +12,10 @@ ssh_options[:forward_agent] = true
 set :use_sudo, true
 
 set :docker_repo_name,"voxmedia/#{application}"
+set :docker_ports,"-p 5000:3000"
 
 set :sauron_api,"docker1.voxops.net:7000"
-set :sauron_container_port, 5000
+set :sauron_container_port, 3000
 set :sauron_container_hostnames, ["#{application}.rnd.voxops.net","#{application}.rnd.voxmedia.com"]
 set :sauron_container_healthcheck, "GET /ping"
 
