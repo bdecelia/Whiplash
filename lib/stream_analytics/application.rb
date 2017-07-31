@@ -7,6 +7,11 @@ module StreamAnalytics
       erb :index
     end
 
+    get '/ping' do
+      status 200
+      json({ status: 'ok' })
+    end
+
     post '/video' do
       video = youtube_api('videos', { id: params[:id], part: 'snippet,liveStreamingDetails' })
       video = video['items'][0]
