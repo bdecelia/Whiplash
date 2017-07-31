@@ -1,5 +1,4 @@
 require 'json'
-load 'deploy'
 require 'capistrano-docker'
 require 'capistrano-sauron'
 require 'capistrano-jenkins'
