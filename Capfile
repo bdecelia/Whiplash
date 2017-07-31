@@ -6,7 +6,7 @@ require 'capistrano-jenkins'
 
 set :application, "youtube-stream-analytics"
 set :scm, :none
-set :branch, ENV["BRANCH"] || master
+set :branch, ENV["BRANCH"] || 'master'
 set :user,"handwire"
 ssh_options[:forward_agent] = true
 set :use_sudo, true
