@@ -9,10 +9,7 @@ ADD Gemfile.lock /app/Gemfile.lock
 
 RUN bundle install --deployment --without development
 
-ADD .env /app/.env
-ADD lib /app/lib
-ADD config.ru /app/
-ADD Procfile /app/
+ADD . /app
 
 EXPOSE 3000
 
