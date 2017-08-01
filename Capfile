@@ -23,8 +23,7 @@ task :production do
   set :jenkins_job, "docker-deployer"
   set :target_environment, "production"
 
-  set :youtube_api_key, ENV["YOUTUBE_API_KEY"]
-  set :docker_args, "-e YOUTUBE_API_KEY=#{youtube_api_key} -e RACK_ENV=#{target_environment}"
+  set :docker_args, "-v /root/youtube-stream-analytics.env:/app/.env"
   role :app, "docker1.voxops.net", :primary => true
 end
 
