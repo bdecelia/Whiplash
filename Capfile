@@ -40,6 +40,6 @@ namespace "docker" do
   end
 
   task :logs do
-    sudo 'docker logs --tail=10 --follow `sudo docker ps | grep vivace | awk \'{print $1}\'`'
+    sudo "docker logs --tail=10 --follow `sudo docker ps | grep #{application} | awk \'{print $1}\'`"
   end
 end
