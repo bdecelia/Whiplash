@@ -39,14 +39,26 @@
     <div class="container" style="padding-top:2%;">
         <div class="row">
             <!-- Graph Container -->
-            <div id="graph_container" class="col-sm-6 col-lg-6 col-xl-6">
-                <%= erb :word_graph %>
+            <div class="col-sm-6 col-lg-6 col-xl-6">
+                <%= erb :comment_graph %>
             </div>
 
             <!-- Chat Goes Here -->
             <div class="col-sm-6 col-lg-6 col-xl-6">
                 <%= erb :chat %>
             </div>
+        </div>
+
+        <div class="row">
+          <!-- Graph Container -->
+          <div class="col-sm-6 col-lg-6 col-xl-6">
+              <%= erb :word_graph %>
+          </div>
+
+          <!-- Graph Container -->
+          <div class="col-sm-6 col-lg-6 col-xl-6">
+              <%= erb :user_graph %>
+          </div>
         </div>
 
         <div class="row">
