@@ -3,61 +3,49 @@
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 </head>
 <body>
-  <div id="comment-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
   <script type="text/javascript">
   $(document).ready(function () {
-
-    //declare global chart so we can access it in the ajax call.
     var chart;
+    var mainDataObj = []
 
     function requestData(){
+      console.log('re retrieving')
+      console.log('OBJ:', mainDataObj)
       $.ajax({
-        url: 'http://localhost:3000/analytics?live_chat_id=EiEKGFVDanNLSXhBV2lJS1dwSzBWN081ajQ4ZxIFL2xpdmU',
+        url: 'http://localhost:3000/analytics?live_chat_id=EiEKGFVDMGdwS1hsXzViZ2Q5T3ZnWlBhN0pFZxIFL2xpdmU',
         success: function(data){
-          var commentRate = data.comments_per_s
-          console.log('LIVE DATA COMMENTS:', commentRate)
+          var point = data.words
+          console.log('LIVE DATA', point)
 
-          var series = chart.series[0];
+          var series = chart.series[0]
+          console.log('SERIES:', series)
+          shift = series.data.length > 20; // shift if the series is longer than 20
 
-          // shift if the series is longer than 20
-          shift = series.data.length > 20;
+             // add the point
+             for(var i = 0; i < point.length; i++ ){
+               mainDataObj.push([new Date().getTime(), point[i].count])
+             }
 
-          //x and y coordinates for the graph
-          //  var x = new Date().getTime();
-          //  var y = data.messages.length;
-
-           for(var i = 0; i < commentRate.length; i++){
-             var x = new Date(commentRate[i].timestamp).getTime()
-             console.log("X:", x)
-             var y = commentRate[i].count
-             chart.series[0].addPoint([x, y], true, shift);
-           }
-
-           //adding to graph dynamically
-          //  chart.series[0].addPoint([x, y], true, shift);
-
-          //  call again after one second
-           setTimeout(requestData, 15000);
+             chart.series[0].addPoint(mainDataObj[mainDataObj.length-1], true, shift);
+             mainDataObj.pop()
+             // call it again after one second
+             setTimeout(requestData, 250);
       }
       })
     }
 
       chart = new Highcharts.Chart({
           chart: {
-              renderTo: 'comment-container',
+              renderTo: 'container',
               defaultSeriesType: 'spline',
               events: {
                   load: requestData
               }
           },
           title: {
-              text: 'Comments per minute'
-          },
-          tooltip: {
-            formatter: function () {
-              return '<b>' + this.y + ' comments' + '</b>'
-            }
+              text: 'Live random data'
           },
           xAxis: {
               type: 'datetime',
@@ -68,12 +56,12 @@
               minPadding: 0.2,
               maxPadding: 0.2,
               title: {
-                  text: 'Comment count',
-                  margin: 10
+                  text: 'Value',
+                  margin: 80
               }
           },
           series: [{
-              name: 'Minutes',
+              name: 'Random data',
               data: []
           }]
       });
