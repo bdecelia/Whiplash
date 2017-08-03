@@ -1,41 +1,36 @@
 <head>
+  <!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
 </head>
 <body>
-  <div class="graph-box" style="margin-top: 200x">
-    <div id="word-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-  </div>
+  <div id="user-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
   <script type="text/javascript">
 
   $(document).ready(function () {
-    console.log("hello world\n")
 
     //retrieve data
     $.ajax({
-
-      // url: "http://localhost:3000/analytics?live_chat_id=" + live_video_id
-
        url: 'https://jsonplaceholder.typicode.com/comments',
        success: function(data) {
-         var word_data = []
+         var user_data = []
          var count_data = []
          for(var i = 0; i < 100; i++){
-           word_data.push(data[i].name)
+           user_data.push(data[i].email)
            count_data.push(data[i].id)
          }
-           my_highchart(word_data, count_data )
+           my_highchart(user_data, count_data )
        }
    });
 
    //highchart column graph
-   function my_highchart(word_data, count_data){
-    let chart =   Highcharts.chart('word-container', {
+   function my_highchart(user_data, count_data){
+    let chart =   Highcharts.chart('user-container', {
           chart: {
               type: 'column'
           },
           title: {
-              text: 'Hot Words'
+              text: 'Hot Users'
           },
           xAxis: {
               categories: [],
@@ -44,7 +39,7 @@
           yAxis: {
               min: 0,
               title: {
-                  text: 'Word count'
+                  text: 'Most Active Users'
               }
           },
           tooltip: {
@@ -58,21 +53,20 @@
           plotOptions: {
               column: {
                   pointPadding: 0.2,
-                  borderWidth: 0
+                  borderWidth: 0,
+                  color: 'red'
               }
           },
           series: [{
-              name: 'Hot Words',
+              name: 'Active Users',
               data: []
           }]
       });
 
       //set chart data
-      chart.xAxis[0].setCategories(word_data)
+      chart.xAxis[0].setCategories(user_data)
       chart.series[0].setData(count_data)
     }
-
-
 });
   </script>
 </body>

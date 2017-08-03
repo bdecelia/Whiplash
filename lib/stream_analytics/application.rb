@@ -1,13 +1,14 @@
 require 'sinatra/base'
 require 'dotenv'
 require 'rest-client'
+require 'date'
+require 'time'
 
 module StreamAnalytics
   class Application < Sinatra::Application
     configure do
       Dotenv.load
     end
-
     get '/' do
       erb :index
     end
@@ -20,7 +21,7 @@ module StreamAnalytics
     post '/video' do
       video = youtube_api('videos', { id: params[:id], part: 'snippet,liveStreamingDetails' })
       video = video['items'][0]
-
+      live_chat_id = video['liveStreamingDetails']['activeLiveChatId']
       json({
         channel_name: video['snippet']['channelTitle'],
         live_chat_id: video['liveStreamingDetails']['activeLiveChatId'],
@@ -29,20 +30,20 @@ module StreamAnalytics
     end
 
     get '/analytics' do
-      next_page_token = ''
-      page_count = 1
+      # next_page_token = ''
+      # page_count = 1
       messages = []
       api_params = { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' }
 
-      loop do
-        break if page_count == 5
-
-        if next_page_token && !next_page_token.empty?
-          api_params[:pageToken] = next_page_token
-        end
+      # loop do
+      #   break if page_count == 5
+      #
+      #   if next_page_token && !next_page_token.empty?
+      #     api_params[:pageToken] = next_page_token
+      #   end
 
         messages_api = youtube_api('liveChat/messages', api_params)
-        break if messages_api['pageInfo']['totalResults'] == 0
+        # break if messages_api['pageInfo']['totalResults'] == 0
 
         messages = messages_api['items'].map do |message|
           {
@@ -52,22 +53,39 @@ module StreamAnalytics
           }
         end.concat(messages)
 
-        next_page_token = messages_api['nextPageToken']
-        break if !next_page_token || next_page_token.empty?
-        puts "NPT: #{next_page_token}"
-
-        puts "ENTERING SLEEP #{messages_api['pollingIntervalMillis']}"
-        sleep (messages_api['pollingIntervalMillis'] / 100)
-        puts "EXITING SLEEP"
-
-        page_count += 1
-      end
+        # next_page_token = messages_api['nextPageToken']
+        # break if !next_page_token || next_page_token.empty?
+        # puts "NPT: #{next_page_token}"
+        #
+        # puts "ENTERING SLEEP #{messages_api['pollingIntervalMillis']}"
+        # sleep (messages_api['pollingIntervalMillis'] / 100)
+        # puts "EXITING SLEEP"
+        #
+        # page_count += 1
+      # end
 
       users = messages.each_with_object(Hash.new(0)) do |message, counter|
         counter[message[:author]] += 1
       end.sort_by { |name, count| count }
         .reverse.map do |name, count|
         { content: name, count: count }
+      end
+
+      comments_per_s = messages.each_with_object(Hash.new(0)) do |message, counter|
+        t = Time.parse(message[:timestamp])
+        # rounded_t = t-t.sec #if you just want to round to remove the seconds
+
+        # rounded_t = t-t.sec-t.min%1*60 #if you want to round to nearest minute
+        nearest = 15
+        rounded_t = t - t.sec%nearest
+        rounded_t = rounded_t.to_s
+        puts rounded_t
+        puts counter[rounded_t]
+        counter[rounded_t] +=1
+      end.map do |time, count|
+        {
+          timestamp: time, count:count
+        }
       end
 
       words = messages
@@ -80,11 +98,13 @@ module StreamAnalytics
       json({
         messages: messages,
         users: users,
-        words: words
+        words: words,
+        comments_per_s: comments_per_s
       })
     end
 
     private
+
 
     def api_key
       ENV['YOUTUBE_API_KEY']
