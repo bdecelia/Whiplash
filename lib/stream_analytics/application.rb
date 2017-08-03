@@ -1,5 +1,8 @@
 require 'sinatra/base'
 require 'rest-client'
+require 'date'
+require 'rubygems'
+require 'active_support/all'
 
 module StreamAnalytics
   class Application < Sinatra::Application
@@ -19,42 +22,15 @@ module StreamAnalytics
     end
 
     get '/analytics' do
-      next_page_token = ''
-      page_count = 1
-      messages = []
-      api_params = { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' }
+      messages = youtube_api('liveChat/messages', { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' })
 
-      loop do
-        break if page_count == 5
-
-        if next_page_token && !next_page_token.empty?
-          api_params[:pageToken] = next_page_token
-        end
-
-        messages_api = youtube_api('liveChat/messages', api_params)
-        break if messages_api['pageInfo']['totalResults'] == 0
-
-        messages = messages_api['items'].map do |message|
-          {
-            author: message['authorDetails']['displayName'],
-            content: message['snippet']['textMessageDetails']['messageText'],
-            timestamp: message['snippet']['publishedAt']
-          }
-        end.concat(messages)
-
-        next_page_token = messages_api['nextPageToken']
-        break if !next_page_token || next_page_token.empty?
-        puts "NPT: #{next_page_token}"
-
-        puts "ENTERING SLEEP #{messages_api['pollingIntervalMillis']}"
-        sleep (messages_api['pollingIntervalMillis'] / 100)
-        puts "EXITING SLEEP"
-
-        page_count += 1
+      messages = messages['items'].map do |message|
+        {
+          author: message['authorDetails']['displayName'],
+          content: message['snippet']['textMessageDetails']['messageText'],
+          timestamp: message['snippet']['publishedAt']
+        }
       end
-
-
-      parseTime(messages)
 
       users = messages.each_with_object(Hash.new(0)) do |message, counter|
         counter[message[:author]] += 1
@@ -62,6 +38,9 @@ module StreamAnalytics
         .reverse.map do |name, count|
         { content: name, count: count }
       end
+
+      parseTime(messages)
+
       words = messages
         .map { |m| m[:content].downcase }
         .map { |c| c.split(' ') }.flatten
@@ -77,14 +56,80 @@ module StreamAnalytics
     end
 
 
+    # get '/analytics' do
+    #   next_page_token = ''
+    #   page_count = 1
+    #   messages = []
+    #   api_params = { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' }
+
+    #   loop do
+    #     break if page_count == 5
+
+    #     if next_page_token && !next_page_token.empty?
+    #       api_params[:pageToken] = next_page_token
+    #     end
+
+    #     messages_api = youtube_api('liveChat/messages', api_params)
+    #     break if messages_api['pageInfo']['totalResults'] == 0
+
+    #     messages = messages_api['items'].map do |message|
+    #       {
+    #         author: message['authorDetails']['displayName'],
+    #         content: message['snippet']['textMessageDetails']['messageText'],
+    #         timestamp: message['snippet']['publishedAt']
+    #       }
+    #     end.concat(messages)
+
+    #     next_page_token = messages_api['nextPageToken']
+    #     break if !next_page_token || next_page_token.empty?
+    #     puts "NPT: #{next_page_token}"
+
+    #     puts "ENTERING SLEEP #{messages_api['pollingIntervalMillis']}"
+    #     sleep (messages_api['pollingIntervalMillis'] / 100)
+    #     puts "EXITING SLEEP"
+
+    #     page_count += 1
+    #   end
+
+    #   parseTime(messages)
+    #   # number_of_comments = parseTime(messages)
+
+
+    #   users = messages.each_with_object(Hash.new(0)) do |message, counter|
+    #     counter[message[:author]] += 1
+    #   end.sort_by { |name, count| count }
+    #     .reverse.map do |name, count|
+    #     { content: name, count: count }
+    #   end
+    #   words = messages
+    #     .map { |m| m[:content].downcase }
+    #     .map { |c| c.split(' ') }.flatten
+    #     .group_by { |n| n }.values
+    #     .sort { |a, b| b.length <=> a.length }
+    #     .map { |a| { content: a[0], count: a.length } }
+
+    #   json({
+    #     messages: messages,
+    #     users: users,
+    #     words: words
+    #   })
+    # end
+
+
     private
 
     def parseTime(messages)
+      #todo make this per minute
       puts "blah"
       number_of_comments = messages.each_with_object(Hash.new(0)) do |message, counter|
-        counter[message[:timestamp]] += 1
+        time = message[:timestamp]
+        time = DateTime.parse(time)
+        p counter[time.change(:min => 0)]
+        counter[time.change(:min => 0)] += 1
+        p counter[time.change(:min => 0)]
       end
       puts number_of_comments
+      return number_of_comments
 
     end
 
