@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'dotenv'
 require 'rest-client'
 require 'date'
 require 'rubygems'
@@ -6,8 +7,17 @@ require 'active_support/all'
 
 module StreamAnalytics
   class Application < Sinatra::Application
+    configure do
+      Dotenv.load
+    end
+
     get '/' do
       erb :index
+    end
+
+    get '/ping' do
+      status 200
+      json({ status: 'ok' })
     end
 
     post '/video' do

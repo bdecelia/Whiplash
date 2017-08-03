@@ -6,11 +6,13 @@ YouTube livestream.
 ### Development
 
 Run the following commands to boot the application. This assumes you
-already have Docker installed on the host computer.
+already have Docker installed on the host computer. Make sure you have
+an `.env` file with `YOUTUBE_API_KEY` defined -- see `.env.example` for
+an example of how to do this.
 
 ```bash
 docker build -t youtube-stream-analytics .
-docker run -p 3000:3000 -e YOUTUBE_API_KEY=apikeyhere youtube-stream-analytics
+docker run -p 3000:3000 youtube-stream-analytics
 ```
 ### Accessing the Live-chat Data
 
