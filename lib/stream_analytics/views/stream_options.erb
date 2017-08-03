@@ -2,8 +2,8 @@
 <div id="stream_options">
     <form id="menu1_form">
         <%# TODO: add file upload/download options  %>
-        <input id="stream_input" name="id" placeholder=<%="#{!params[:id].nil? ? params[:id] : ''}"%>></br>
-        <input id="search" name="q" placeholder=<%="#{!params[:q].nil? ? params[:q] : ''}"%>></br>
+        Video ID: <input id="stream_input" name="v" value=<%="#{!params[:v].nil? ? params[:v] : ''}"%>></br>
+        Word Search: <input id="search" name="q" value=<%="#{!params[:q].nil? ? params[:q] : ''}"%>></br>
         <input type="submit">
     </form>
 </div>
