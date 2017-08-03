@@ -1,0 +1,72 @@
+<head>
+  <!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+<body>
+  <div id="user-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+  <script type="text/javascript">
+
+  $(document).ready(function () {
+
+    //retrieve data
+    $.ajax({
+       url: 'https://jsonplaceholder.typicode.com/comments',
+       success: function(data) {
+         var user_data = []
+         var count_data = []
+         for(var i = 0; i < 100; i++){
+           user_data.push(data[i].email)
+           count_data.push(data[i].id)
+         }
+           my_highchart(user_data, count_data )
+       }
+   });
+
+   //highchart column graph
+   function my_highchart(user_data, count_data){
+    let chart =   Highcharts.chart('user-container', {
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: 'Hot Users'
+          },
+          xAxis: {
+              categories: [],
+              crosshair: true
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: 'Most Active Users'
+              }
+          },
+          tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                  '<td style="padding:0"><b>Used {point.y:.1f} times</b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+          },
+          plotOptions: {
+              column: {
+                  pointPadding: 0.2,
+                  borderWidth: 0,
+                  color: 'red'
+              }
+          },
+          series: [{
+              name: 'Active Users',
+              data: []
+          }]
+      });
+
+      //set chart data
+      chart.xAxis[0].setCategories(user_data)
+      chart.series[0].setData(count_data)
+    }
+});
+  </script>
+</body>
