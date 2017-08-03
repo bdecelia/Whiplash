@@ -1,5 +1,7 @@
 body{
     color: #000;
+    font-family: Gotham, sans-serif;
+    background-color: rgb(231,231,226);
 }
 
 #chat_img{
@@ -28,4 +30,20 @@ input{
 
 li {
   list-style-type: none;
+}
+
+@font-face {
+    font-family: Gotham;
+    src: url("../fonts/Gotham/GothamHTF-Black.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Gotham;
+    font-weight: bold;
+    src: url("../fonts/Gotham/GothamHTF-Bold.otf") format("opentype");
+}
+
+.navbar {
+  background-color: rgb(255, 0, 82);
+  color: white;
 }
