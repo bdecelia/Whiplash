@@ -9,9 +9,13 @@
   <script type="text/javascript">
 
   $(document).ready(function () {
+    console.log("hello world\n")
 
     //retrieve data
     $.ajax({
+
+      // url: "http://localhost:3000/analytics?live_chat_id=" + live_video_id
+
        url: 'https://jsonplaceholder.typicode.com/comments',
        success: function(data) {
          var word_data = []
@@ -67,6 +71,8 @@
       chart.xAxis[0].setCategories(word_data)
       chart.series[0].setData(count_data)
     }
+
+
 });
   </script>
 </body>
