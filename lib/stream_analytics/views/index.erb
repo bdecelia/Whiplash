@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,38 +8,23 @@
     <title>LiveStream Analysis</title>
 
     <!-- Bootstrap & JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel = "stylesheet" type = "text/css" href = "/assets/css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-light navbar-toggleable-sm bg-faded justify-content-center">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="/" class="navbar-brand d-flex w-50 mr-auto">Polygon</a>
-        <div class="navbar-collapse collapse" id="collapsingNavbar3">
-            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Index</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Help</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <%= erb :navbar %>
 
     <!-- Main Layout -->
-    <div class="container" style="padding-top:2%;">
+    <div class="container">
         <div class="row">
             <!-- Graph Container -->
             <div id="graph_container" class="col-sm-6 col-lg-6 col-xl-6">
-                <%= erb :word_graph %>
+                <%#= erb :word_graph %>
+                <%= erb :tabs %>
             </div>
 
             <!-- Chat Goes Here -->
@@ -52,17 +36,18 @@
         <div class="row">
             <!-- Stream Options Menu -->
             <div id="menu_container" class="col-sm-6 col-lg-6 col-xl-6">
-                <%= erb :stream_options %>
+                <%# erb :stream_options %>
             </div>
 
             <!-- Poll  -->
             <div id="menu_container" class="col-sm-6 col-lg-6 col-xl-6">
-                <%= erb :poll %>
+                <%# erb :poll %>
             </div>
 
         </div>
     </div>
 
-</body>
+    <%# erb :footer %>
 
+</body>
 </html>
