@@ -73,9 +73,14 @@ module StreamAnalytics
 
       comments_per_s = messages.each_with_object(Hash.new(0)) do |message, counter|
         t = Time.parse(message[:timestamp])
-        nearest = 60 #nearest minute
-        rounded_t = t-t.sec-t.min%nearest
+        # rounded_t = t-t.sec #if you just want to round to remove the seconds
+
+        # rounded_t = t-t.sec-t.min%1*60 #if you want to round to nearest minute
+        nearest = 15
+        rounded_t = t - t.sec%nearest
         rounded_t = rounded_t.to_s
+        puts rounded_t
+        puts counter[rounded_t]
         counter[rounded_t] +=1
       end.map do |time, count|
         {
