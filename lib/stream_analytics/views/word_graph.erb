@@ -16,7 +16,7 @@
          success: function(data) {
            var word_data = []
            var count_data = []
-           for(var i = 0; i < 100; i++){
+           for(var i = 0; i < 10; i++){
              word_data.push(data.words[i].content)
              count_data.push(data.words[i].count)
            }
@@ -39,6 +39,9 @@
           },
           title: {
               text: 'Hot Words'
+          },
+          subtitle: {
+              text: "Word count updated every 5 seconds"
           },
           xAxis: {
               categories: [],
