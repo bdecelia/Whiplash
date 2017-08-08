@@ -30,8 +30,8 @@ module StreamAnalytics
     end
 
     get '/analytics' do
-      # next_page_token = ''
-        # page_count = 1
+        next_page_token = ''
+        page_count = 1
         messages = []
         api_params = { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' }
 
