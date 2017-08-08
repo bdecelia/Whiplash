@@ -1,10 +1,8 @@
 <head>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
 </head>
 <body>
-  <h2>Word Graph</h2>
-  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  <div id="word-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
   <script type="text/javascript">
 
@@ -12,22 +10,22 @@
 
     //retrieve data
     $.ajax({
-       url: 'https://jsonplaceholder.typicode.com/comments',
+       url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
        success: function(data) {
          console.log('data', data)
-         var email_data = []
-         var id_data = []
+         var content_data = []
+         var count_data = []
          for(var i = 0; i < 100; i++){
-           email_data.push(data[i].email)
-           id_data.push(data[i].id)
+           content_data.push(data.words[i].content)
+           count_data.push(data.words[i].count)
          }
-           my_highchart(email_data, id_data )
+           my_highchart(content_data, count_data)
        }
    });
 
    //highchart column graph
-   function my_highchart(email_data, id_data){
-    let chart =   Highcharts.chart('container', {
+   function my_highchart(content, count){
+    let chart =   Highcharts.chart('word-container', {
           chart: {
               type: 'column'
           },
@@ -65,8 +63,8 @@
       });
 
       //set chart data
-      chart.xAxis[0].setCategories(email_data)
-      chart.series[0].setData(id_data)
+      chart.xAxis[0].setCategories(content)
+      chart.series[0].setData(count)
     }
 });
   </script>
