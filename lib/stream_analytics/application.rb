@@ -9,10 +9,6 @@ module StreamAnalytics
     end
 
     get '/' do
-      video = params[:v].nil? ? nil : youtube_api('videos', { id: params[:v], part: 'snippet,liveStreamingDetails' })['items'][0]
-      @stream_title = video.nil? ? nil : "#{video['snippet']['channelTitle']} | #{video['snippet']['title']}"
-      @stream_id = video.nil? ? nil : video['liveStreamingDetails']['activeLiveChatId']
-
       erb :index
     end
 
