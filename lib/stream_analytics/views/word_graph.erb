@@ -1,37 +1,34 @@
 <head>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
 </head>
 <body>
 
-  <div class="graph-box" style="margin-top: 200x">
-    <div id="word-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-  </div>
+  <h2>Word Graph</h2>
+  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
   <script type="text/javascript">
 
   $(document).ready(function () {
-    console.log("hello world\n")
 
     //retrieve data
     $.ajax({
-
-      // url: "http://localhost:3000/analytics?live_chat_id=" + live_video_id
-
        url: 'https://jsonplaceholder.typicode.com/comments',
        success: function(data) {
-         var word_data = []
-         var count_data = []
+         console.log('data', data)
+         var email_data = []
+         var id_data = []
          for(var i = 0; i < 100; i++){
-           word_data.push(data[i].name)
-           count_data.push(data[i].id)
+           email_data.push(data[i].email)
+           id_data.push(data[i].id)
          }
-           my_highchart(word_data, count_data )
+           my_highchart(email_data, id_data )
        }
    });
 
    //highchart column graph
-   function my_highchart(word_data, count_data){
-    let chart =   Highcharts.chart('word-container', {
+   function my_highchart(email_data, id_data){
+    let chart =   Highcharts.chart('container', {
           chart: {
               type: 'column'
           },
@@ -69,11 +66,9 @@
       });
 
       //set chart data
-      chart.xAxis[0].setCategories(word_data)
-      chart.series[0].setData(count_data)
+      chart.xAxis[0].setCategories(email_data)
+      chart.series[0].setData(id_data)
     }
-
-
 });
   </script>
 </body>
