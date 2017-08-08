@@ -1,5 +1,4 @@
 <head>
-  <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 </head>
 <body>
@@ -8,7 +7,7 @@
   <script type="text/javascript">
   $(document).ready(function () {
     var chart;
-    var mainDataObj = []
+    var dates = []
 
     function requestData(){
       $.ajax({
@@ -20,17 +19,20 @@
           var series = chart.series[0];
 
           // shift if the series is longer than 20
-          shift = series.data.length > 20;
+          shift = series.data.length > 10;
 
-          //add all data points to target entry point
            for(var i = 0; i < commentRate.length; i++){
-             var x = new Date(commentRate[i].timestamp).getTime()
-             var y = commentRate[i].count
-             chart.series[0].addPoint([x, y], true, shift);
-           }
+            var x = new Date(commentRate[i].timestamp).getTime()
 
-          //  call again after 15 second
-           setTimeout(requestData, 15000);
+            if (dates.indexOf(x) === -1){
+              dates.push(x)
+              var y = commentRate[i].count
+              //add all data points to target entry point
+              chart.series[0].addPoint([x, y], true, shift);
+            }
+           }
+          //  call again after 10 second
+           setTimeout(requestData, 10000);
       }
       })
     }
@@ -63,6 +65,16 @@
               formatter: function () {
                   return '<b>' + this.y + ' comments' + '</b><br/>'
               }
+          },
+          plotOptions: {
+          series: {
+            marker: {
+                enabled: true
+              },
+            dataLabels: {
+                enabled: true
+              }
+            }
           },
           series: [{
               name: 'Timestamp',
