@@ -11,7 +11,7 @@
 
     function requestData(){
       $.ajax({
-        url: 'http://localhost:3000/analytics?live_chat_id=EiEKGFVDanNLSXhBV2lJS1dwSzBWN081ajQ4ZxIFL2xpdmU',
+        url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
         success: function(data){
           var commentRate = data.comments_per_s
 
@@ -46,7 +46,10 @@
               }
           },
           title: {
-              text: 'Live Comment count per 15 seconds'
+              text: 'Comment Count'
+          },
+          subtitle: {
+            text: "Live comment count per 15 seconds"
           },
           xAxis: {
               type: 'datetime',
