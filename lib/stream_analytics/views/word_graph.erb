@@ -14,22 +14,22 @@
       $.ajax({
          url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
          success: function(data) {
-           var content_data = []
+           var word_data = []
            var count_data = []
            for(var i = 0; i < 100; i++){
-             content_data.push(data.words[i].content)
+             word_data.push(data.words[i].content)
              count_data.push(data.words[i].count)
            }
 
            //set chart data
-           chart.xAxis[0].setCategories(content_data)
-           chart.series[0].setData(count_data)
+           chart.xAxis[0].setCategories(word_data);
+           chart.series[0].setData(count_data);
 
            //reflect new pulled data
-           chart.redraw()
+           chart.redraw();
          }
      })
-  }, 5000)
+  }, 5000);
 
 
    //highchart column graph
