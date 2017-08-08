@@ -1,4 +1,5 @@
 <head>
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 </head>
 <body>
@@ -6,28 +7,36 @@
 
   <script type="text/javascript">
   $(document).ready(function () {
-
-    //declare global chart so we can access it in the ajax call.
     var chart;
+    var mainDataObj = []
 
     function requestData(){
       $.ajax({
-        url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
+        url: 'http://localhost:3000/analytics?live_chat_id=EiEKGFVDanNLSXhBV2lJS1dwSzBWN081ajQ4ZxIFL2xpdmU',
         success: function(data){
           var commentRate = data.comments_per_s
+          console.log('LIVE DATA COMMENTS:', commentRate)
 
           var series = chart.series[0];
 
           // shift if the series is longer than 20
           shift = series.data.length > 20;
 
+          //x and y coordinates for the graph
+          //  var x = new Date().getTime();
+          //  var y = data.messages.length;
+
            for(var i = 0; i < commentRate.length; i++){
              var x = new Date(commentRate[i].timestamp).getTime()
+             console.log("X:", x)
              var y = commentRate[i].count
              chart.series[0].addPoint([x, y], true, shift);
            }
 
-          //  call again after 15 second
+           //adding to graph dynamically
+          //  chart.series[0].addPoint([x, y], true, shift);
+
+          //  call again after one second
            setTimeout(requestData, 15000);
       }
       })
@@ -42,12 +51,7 @@
               }
           },
           title: {
-              text: 'Comments every 15 seconds'
-          },
-          tooltip: {
-            formatter: function () {
-              return '<b>' + this.y + ' comments' + '</b>'
-            }
+              text: 'Live Comment count per 15 seconds'
           },
           xAxis: {
               type: 'datetime',
@@ -59,7 +63,7 @@
               maxPadding: 0.2,
               title: {
                   text: 'Comment count',
-                  margin: 10
+                  margin: 20
               }
           },
           series: [{
