@@ -2,30 +2,38 @@
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
 </head>
 <body>
-  <div id="word-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
-  <script type="text/javascript">
+    <div id="word-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <script type="text/javascript">
 
   $(document).ready(function () {
+  let chart;
 
-    //retrieve data
-    $.ajax({
-       url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
-       success: function(data) {
-         console.log('data', data)
-         var content_data = []
-         var count_data = []
-         for(var i = 0; i < 100; i++){
-           content_data.push(data.words[i].content)
-           count_data.push(data.words[i].count)
+  setInterval(function refreshDiv(){
+
+      //retrieve data
+      $.ajax({
+         url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
+         success: function(data) {
+           var word_data = []
+           var count_data = []
+           for(var i = 0; i < 100; i++){
+             word_data.push(data.words[i].content)
+             count_data.push(data.words[i].count)
+           }
+
+           //set chart data
+           chart.xAxis[0].setCategories(word_data);
+           chart.series[0].setData(count_data);
+
+           //reflect new pulled data
+           chart.redraw();
          }
-           my_highchart(content_data, count_data)
-       }
-   });
+     })
+  }, 5000);
+
 
    //highchart column graph
-   function my_highchart(content, count){
-    let chart =   Highcharts.chart('word-container', {
+     chart =   Highcharts.chart('word-container', {
           chart: {
               type: 'column'
           },
@@ -45,7 +53,7 @@
           tooltip: {
               headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
               pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                  '<td style="padding:0"><b>Used {point.y:.1f} times</b></td></tr>',
+                  '<td style="padding:0"><b>Active {point.y:.1f} times</b></td></tr>',
               footerFormat: '</table>',
               shared: true,
               useHTML: true
@@ -61,11 +69,6 @@
               data: []
           }]
       });
-
-      //set chart data
-      chart.xAxis[0].setCategories(content)
-      chart.series[0].setData(count)
-    }
 });
   </script>
 </body>

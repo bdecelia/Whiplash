@@ -1,5 +1,4 @@
 <head>
-  <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 </head>
 <body>
@@ -8,36 +7,32 @@
   <script type="text/javascript">
   $(document).ready(function () {
     var chart;
-    var mainDataObj = []
+    var dates = []
 
     function requestData(){
       $.ajax({
         url: 'http://localhost:3000/analytics?live_chat_id=EiEKGFVDanNLSXhBV2lJS1dwSzBWN081ajQ4ZxIFL2xpdmU',
         success: function(data){
           var commentRate = data.comments_per_s
-          console.log('LIVE DATA COMMENTS:', commentRate)
 
+          //target data entry point in chart
           var series = chart.series[0];
 
           // shift if the series is longer than 20
-          shift = series.data.length > 20;
-
-          //x and y coordinates for the graph
-          //  var x = new Date().getTime();
-          //  var y = data.messages.length;
+          shift = series.data.length > 10;
 
            for(var i = 0; i < commentRate.length; i++){
-             var x = new Date(commentRate[i].timestamp).getTime()
-             console.log("X:", x)
-             var y = commentRate[i].count
-             chart.series[0].addPoint([x, y], true, shift);
+            var x = new Date(commentRate[i].timestamp).getTime()
+
+            if (dates.indexOf(x) === -1){
+              dates.push(x)
+              var y = commentRate[i].count
+              //add all data points to target entry point
+              chart.series[0].addPoint([x, y], true, shift);
+            }
            }
-
-           //adding to graph dynamically
-          //  chart.series[0].addPoint([x, y], true, shift);
-
-          //  call again after one second
-           setTimeout(requestData, 15000);
+          //  call again after 10 second
+           setTimeout(requestData, 10000);
       }
       })
     }
@@ -65,6 +60,21 @@
                   text: 'Comment count',
                   margin: 20
               }
+          },
+          tooltip: {
+              formatter: function () {
+                  return '<b>' + this.y + ' comments' + '</b><br/>'
+              }
+          },
+          plotOptions: {
+          series: {
+            marker: {
+                enabled: true
+              },
+            dataLabels: {
+                enabled: true
+              }
+            }
           },
           series: [{
               name: 'Timestamp',
