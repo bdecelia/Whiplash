@@ -15,28 +15,21 @@
         url: 'http://localhost:3000/analytics?live_chat_id=EiEKGFVDanNLSXhBV2lJS1dwSzBWN081ajQ4ZxIFL2xpdmU',
         success: function(data){
           var commentRate = data.comments_per_s
-          console.log('LIVE DATA COMMENTS:', commentRate)
 
+          //target data entry point in chart
           var series = chart.series[0];
 
           // shift if the series is longer than 20
           shift = series.data.length > 20;
 
-          //x and y coordinates for the graph
-          //  var x = new Date().getTime();
-          //  var y = data.messages.length;
-
+          //add all data points to target entry point
            for(var i = 0; i < commentRate.length; i++){
              var x = new Date(commentRate[i].timestamp).getTime()
-             console.log("X:", x)
              var y = commentRate[i].count
              chart.series[0].addPoint([x, y], true, shift);
            }
 
-           //adding to graph dynamically
-          //  chart.series[0].addPoint([x, y], true, shift);
-
-          //  call again after one second
+          //  call again after 15 second
            setTimeout(requestData, 15000);
       }
       })
