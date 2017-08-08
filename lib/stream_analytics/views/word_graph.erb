@@ -3,9 +3,8 @@
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
 </head>
 <body>
-
   <h2>Word Graph</h2>
-  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  <div id="word-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
   <script type="text/javascript">
 
@@ -28,7 +27,7 @@
 
    //highchart column graph
    function my_highchart(email_data, id_data){
-    let chart =   Highcharts.chart('container', {
+    let chart =   Highcharts.chart('word-container', {
           chart: {
               type: 'column'
           },

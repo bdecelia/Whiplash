@@ -3,7 +3,7 @@
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 </head>
 <body>
-  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  <div id="comment-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
   <script type="text/javascript">
   $(document).ready(function () {
@@ -38,7 +38,7 @@
 
       chart = new Highcharts.Chart({
           chart: {
-              renderTo: 'container',
+              renderTo: 'comment-container',
               defaultSeriesType: 'spline',
               events: {
                   load: requestData
