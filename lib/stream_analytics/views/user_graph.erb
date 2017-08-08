@@ -1,0 +1,71 @@
+<head>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+<body>
+  <div id="user-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+  <script type="text/javascript">
+
+  $(document).ready(function () {
+
+    //retrieve data
+    $.ajax({
+       url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
+       success: function(data) {
+         console.log('data', data.users)
+         var content_data = []
+         var count_data = []
+         for(var i = 0; i < 20; i++){
+           content_data.push(data.users[i].content)
+           count_data.push(data.users[i].count)
+         }
+           my_highchart(content_data, count_data)
+       }
+   });
+
+   //highchart column graph
+   function my_highchart(content, count){
+    let chart =   Highcharts.chart('user-container', {
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: 'Hot Users'
+          },
+          xAxis: {
+              categories: [],
+              crosshair: true
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: 'Word count'
+              }
+          },
+          tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                  '<td style="padding:0"><b>Used {point.y:.1f} times</b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+          },
+          plotOptions: {
+              column: {
+                  pointPadding: 0.2,
+                  borderWidth: 0
+              }
+          },
+          series: [{
+              name: 'Hot Users',
+              data: []
+          }]
+      });
+
+      //set chart data
+      chart.xAxis[0].setCategories(content)
+      chart.series[0].setData(count)
+    }
+});
+  </script>
+</body>
