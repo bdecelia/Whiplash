@@ -34,15 +34,15 @@ module StreamAnalytics
       messages = []
       api_params = { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' }
 
-      # loop do
-      #   break if page_count == 5
-      #
-      #   if next_page_token && !next_page_token.empty?
-      #     api_params[:pageToken] = next_page_token
-      #   end
+      loop do
+        break if page_count == 5
+
+        if next_page_token && !next_page_token.empty?
+          api_params[:pageToken] = next_page_token
+        end
 
         messages_api = youtube_api('liveChat/messages', api_params)
-        # break if messages_api['pageInfo']['totalResults'] == 0
+        break if messages_api['pageInfo']['totalResults'] == 0
 
         messages = messages_api['items'].map do |message|
           {
@@ -52,16 +52,16 @@ module StreamAnalytics
           }
         end.concat(messages)
 
-        # next_page_token = messages_api['nextPageToken']
-        # break if !next_page_token || next_page_token.empty?
-        # puts "NPT: #{next_page_token}"
-        #
-        # puts "ENTERING SLEEP #{messages_api['pollingIntervalMillis']}"
-        # sleep (messages_api['pollingIntervalMillis'] / 100)
-        # puts "EXITING SLEEP"
-        #
-        # page_count += 1
-      # end
+        next_page_token = messages_api['nextPageToken']
+        break if !next_page_token || next_page_token.empty?
+        puts "NPT: #{next_page_token}"
+
+        puts "ENTERING SLEEP #{messages_api['pollingIntervalMillis']}"
+        sleep (messages_api['pollingIntervalMillis'] / 100)
+        puts "EXITING SLEEP"
+
+        page_count += 1
+      end
 
       users = messages.each_with_object(Hash.new(0)) do |message, counter|
         counter[message[:author]] += 1
@@ -75,7 +75,7 @@ module StreamAnalytics
       # rounded_t = t-t.sec #if you just want to round to remove the seconds
 
       # rounded_t = t-t.sec-t.min%1*60 #if you want to round to nearest minute
-      nearest = 15
+      nearest = 10
       rounded_t = t - t.sec%nearest
       rounded_t = rounded_t.to_s
       puts rounded_t
