@@ -25,6 +25,7 @@
           if (dates.indexOf(x) === -1){
             dates.push(x)
             var y = commentRate[i].count
+
             //add all data points to target entry point
             chart.series[0].addPoint([x, y], true, shift);
           }
