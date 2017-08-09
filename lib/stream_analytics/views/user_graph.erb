@@ -1,72 +1,76 @@
+<head>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
 <body>
     <div id="user-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
     <script type="text/javascript">
-    let chart;
-    
-    //retrieve data
-    setInterval(function refreshDiv(){
-        $.ajax({
-           url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
-           success: function(data) {
-             var user_data = []
-             var count_data = []
-             for(var i = 0; i < 20; i++){
-               user_data.push(data.users[i].content)
-               count_data.push(data.users[i].count)
-             }
 
-             //set chart data
-             chart.xAxis[0].setCategories(user_data);
-             chart.series[0].setData(count_data);
+  $(document).ready(function () {
+  let chart;
 
-             //reflect new pulled data
-             chart.redraw();
+  setInterval(function refreshDiv(){
+      //retrieve data
+      $.ajax({
+         url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
+         success: function(data) {
+           var user_data = []
+           var count_data = []
+           for(var i = 0; i < 20; i++){
+             user_data.push(data.users[i].content)
+             count_data.push(data.users[i].count)
            }
-       })
-    }, 5000);
+
+           //set chart data
+           chart.xAxis[0].setCategories(user_data);
+           chart.series[0].setData(count_data);
+
+           //reflect new pulled data
+           chart.redraw();
+         }
+     })
+  }, 5000);
 
 
-     //highchart column graph
-       chart =   Highcharts.chart('user-container', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Top Users'
-            },
-            subtitle: {
-              text: "User count updated every 5 seconds"
-            },
-            xAxis: {
-                categories: [],
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'User Activity Count'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:""#FF0052";padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>Active {point.y:.1f} times</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0,
-                    color: "#FF0052"
-                }
-            },
-            series: [{
-                name: 'Top Users',
-                data: []
-            }]
-        });
+   //highchart column graph
+     chart =   Highcharts.chart('user-container', {
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: 'Top Users'
+          },
+          subtitle: {
+            text: "User count updated every 5 seconds"
+          },
+          xAxis: {
+              categories: [],
+              crosshair: true
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: 'Word count'
+              }
+          },
+          tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                  '<td style="padding:0"><b>Active {point.y:.1f} times</b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+          },
+          plotOptions: {
+              column: {
+                  pointPadding: 0.2,
+                  borderWidth: 0
+              }
+          },
+          series: [{
+              name: 'Hot Words',
+              data: []
+          }]
+      });
+});
   </script>
 </body>
