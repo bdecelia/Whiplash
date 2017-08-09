@@ -2,13 +2,12 @@
     <div id="user-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <script type="text/javascript">
 
-  $(document).ready(function () {
   let chart;
 
   setInterval(function refreshDiv(){
       //retrieve data
       $.ajax({
-         url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
+         url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
          success: function(data) {
            var user_data = []
            var count_data = []
@@ -46,12 +45,12 @@
           yAxis: {
               min: 0,
               title: {
-                  text: 'Word count'
+                  text: 'User Activity Count'
               }
           },
           tooltip: {
               headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+              pointFormat: '<tr><td style="color:""#FF0052";padding:0">{series.name}: </td>' +
                   '<td style="padding:0"><b>Active {point.y:.1f} times</b></td></tr>',
               footerFormat: '</table>',
               shared: true,
@@ -60,14 +59,14 @@
           plotOptions: {
               column: {
                   pointPadding: 0.2,
-                  borderWidth: 0
+                  borderWidth: 0,
+                  color: "#FF0052"
               }
           },
           series: [{
-              name: 'Hot Words',
+              name: 'Top Users',
               data: []
           }]
       });
-});
   </script>
 </body>
