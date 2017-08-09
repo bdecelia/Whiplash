@@ -6,33 +6,35 @@
     var chart;
     var dates = []
 
-    function requestData(){
-      $.ajax({
-        url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
-        success: function(data){
-          var commentRate = data.comments_per_s
+  function requestData(){
+    if( window.liveChatID){
+    $.ajax({
+      url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
+      success: function(data){
+        var commentRate = data.comments_per_s
 
-          //target data entry point in chart
-          var series = chart.series[0];
+        //target data entry point in chart
+        var series = chart.series[0];
 
-          // shift if the series is longer than 20
-          shift = series.data.length > 10;
+        // shift if the series is longer than 20
+        shift = series.data.length > 10;
 
-           for(var i = 0; i < commentRate.length; i++){
-            var x = new Date(commentRate[i].timestamp).getTime()
+        for(var i = 0; i < commentRate.length; i++){
+          var x = new Date(commentRate[i].timestamp).getTime()
 
-            if (dates.indexOf(x) === -1){
-              dates.push(x)
-              var y = commentRate[i].count
-              //add all data points to target entry point
-              chart.series[0].addPoint([x, y], true, shift);
-            }
-           }
-          //  call again after 10 second
-           setTimeout(requestData, 10000);
+          if (dates.indexOf(x) === -1){
+            dates.push(x)
+            var y = commentRate[i].count
+            //add all data points to target entry point
+            chart.series[0].addPoint([x, y], true, shift);
+          }
+        }
+        //  call again after 10 second
       }
-      })
-    }
+    })
+  }
+  setTimeout(requestData, 10000);
+}
 
       chart = new Highcharts.Chart({
           chart: {
@@ -46,7 +48,7 @@
               text: 'Comment Count'
           },
           subtitle: {
-            text: "Live comment count per 15 seconds"
+            text: "Live comment count per 10 seconds"
           },
           xAxis: {
               type: 'datetime',
@@ -68,6 +70,7 @@
           },
           plotOptions: {
           series: {
+            color: "#FF0052",
             marker: {
                 enabled: true
               },
