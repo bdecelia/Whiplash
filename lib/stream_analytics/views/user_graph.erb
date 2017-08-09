@@ -2,27 +2,26 @@
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
 </head>
 <body>
-    <div id="word-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <div id="user-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <script type="text/javascript">
 
   $(document).ready(function () {
   let chart;
 
   setInterval(function refreshDiv(){
-
       //retrieve data
       $.ajax({
          url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
          success: function(data) {
-           var word_data = []
+           var user_data = []
            var count_data = []
-           for(var i = 0; i < 10; i++){
-             word_data.push(data.words[i].content)
-             count_data.push(data.words[i].count)
+           for(var i = 0; i < 20; i++){
+             user_data.push(data.users[i].content)
+             count_data.push(data.users[i].count)
            }
 
            //set chart data
-           chart.xAxis[0].setCategories(word_data);
+           chart.xAxis[0].setCategories(user_data);
            chart.series[0].setData(count_data);
 
            //reflect new pulled data
@@ -33,16 +32,15 @@
 
 
    //highchart column graph
-   function my_highchart(email_data, id_data){
-    let chart =   Highcharts.chart('word-container', {
+     chart =   Highcharts.chart('user-container', {
           chart: {
               type: 'column'
           },
           title: {
-              text: 'Hot Words'
+              text: 'Top Users'
           },
           subtitle: {
-              text: "Word count updated every 5 seconds"
+            text: "User count updated every 5 seconds"
           },
           xAxis: {
               categories: [],
