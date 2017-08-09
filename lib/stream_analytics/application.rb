@@ -30,39 +30,39 @@ module StreamAnalytics
     end
 
     get '/analytics' do
-        next_page_token = ''
-        page_count = 1
-        messages = []
-        api_params = { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' }
+      next_page_token = ''
+      page_count = 1
+      messages = []
+      api_params = { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' }
 
-        # loop do
-        #   break if page_count == 5
+      loop do
+        break if page_count == 5
 
-        #   if next_page_token && !next_page_token.empty?
-        #     api_params[:pageToken] = next_page_token
-        #   end
+        if next_page_token && !next_page_token.empty?
+          api_params[:pageToken] = next_page_token
+        end
 
-          messages_api = youtube_api('liveChat/messages', api_params)
-          # break if messages_api['pageInfo']['totalResults'] == 0
+        messages_api = youtube_api('liveChat/messages', api_params)
+        # break if messages_api['pageInfo']['totalResults'] == 0
 
-          messages = messages_api['items'].map do |message|
-            {
-              author: message['authorDetails']['displayName'],
-              content: message['snippet']['textMessageDetails']['messageText'],
-              timestamp: message['snippet']['publishedAt']
-            }
-          end.concat(messages)
+        messages = messages_api['items'].map do |message|
+          {
+            author: message['authorDetails']['displayName'],
+            content: message['snippet']['textMessageDetails']['messageText'],
+            timestamp: message['snippet']['publishedAt']
+          }
+        end.concat(messages)
 
-          # next_page_token = messages_api['nextPageToken']
-          # break if !next_page_token || next_page_token.empty?
-          # puts "NPT: #{next_page_token}"
+        next_page_token = messages_api['nextPageToken']
+        break if !next_page_token || next_page_token.empty?
+        puts "NPT: #{next_page_token}"
 
-          # puts "ENTERING SLEEP #{messages_api['pollingIntervalMillis']}"
-          # sleep (messages_api['pollingIntervalMillis'] / 100)
-          # puts "EXITING SLEEP"
+        puts "ENTERING SLEEP #{messages_api['pollingIntervalMillis']}"
+        sleep (messages_api['pollingIntervalMillis'] / 100)
+        puts "EXITING SLEEP"
 
-          # page_count += 1
-        # end
+        page_count += 1
+      end
 
       users = messages.each_with_object(Hash.new(0)) do |message, counter|
         counter[message[:author]] += 1
@@ -74,7 +74,6 @@ module StreamAnalytics
       comments_per_s = messages.each_with_object(Hash.new(0)) do |message, counter|
       t = Time.parse(message[:timestamp])
       # rounded_t = t-t.sec #if you just want to round to remove the seconds
-
       # rounded_t = t-t.sec-t.min%1*60 #if you want to round to nearest minute
       nearest = 10
       rounded_t = t - t.sec%nearest
@@ -120,6 +119,7 @@ module StreamAnalytics
         )
       )
     end
+
     def stopwords
       @_stopwords ||= JSON.parse(File.read("#{Dir.pwd}/lib/stream_analytics/stopwords.json"))
     end
