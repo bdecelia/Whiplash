@@ -43,8 +43,7 @@ module StreamAnalytics
         end
 
         messages_api = youtube_api('liveChat/messages', api_params)
-        # break if messages_api['pageInfo']['totalResults'] == 0
-
+        break if messages_api['pageInfo']['totalResults'] == 0
         messages = messages_api['items'].map do |message|
           {
             author: message['authorDetails']['displayName'],
