@@ -1,78 +1,73 @@
-<head>
-  <script src="https://code.highcharts.com/modules/exporting.js"></script>
-</head>
 <body>
     <div id="word-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
     <script type="text/javascript">
+    $(document).ready(function () {
+    let chart;
 
-  $(document).ready(function () {
-  let chart;
+    //retrieve data
+    setInterval(function refreshDiv(){
+        $.ajax({
+           url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
+           success: function(data) {
+             var word_data = []
+             var count_data = []
+             for(var i = 0; i < 10; i++){
+               word_data.push(data.words[i].content)
+               count_data.push(data.words[i].count)
+             }
 
-  setInterval(function refreshDiv(){
+             //set chart data
+             chart.xAxis[0].setCategories(word_data);
+             chart.series[0].setData(count_data);
 
-      //retrieve data
-      $.ajax({
-         url: 'http://localhost:3000/analytics?live_chat_id=Cg0KC2hYM2owc1E3b3Q4',
-         success: function(data) {
-           var word_data = []
-           var count_data = []
-           for(var i = 0; i < 10; i++){
-             word_data.push(data.words[i].content)
-             count_data.push(data.words[i].count)
+             //reflect new pulled data
+             chart.redraw();
            }
+       })
+    }, 5000);
 
-           //set chart data
-           chart.xAxis[0].setCategories(word_data);
-           chart.series[0].setData(count_data);
-
-           //reflect new pulled data
-           chart.redraw();
-         }
-     })
-  }, 5000);
-
-
-   //highchart column graph
-   function my_highchart(email_data, id_data){
-    let chart =   Highcharts.chart('word-container', {
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: 'Hot Words'
-          },
-          subtitle: {
-              text: "Word count updated every 5 seconds"
-          },
-          xAxis: {
-              categories: [],
-              crosshair: true
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: 'Word count'
-              }
-          },
-          tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                  '<td style="padding:0"><b>Active {point.y:.1f} times</b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-          },
-          plotOptions: {
-              column: {
-                  pointPadding: 0.2,
-                  borderWidth: 0
-              }
-          },
-          series: [{
-              name: 'Hot Words',
-              data: []
-          }]
-      });
-});
+     //highchart column graph
+       chart =   Highcharts.chart('word-container', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Top Words'
+            },
+            subtitle: {
+              text: "User count updated every 5 seconds"
+            },
+            xAxis: {
+                categories: [],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Word Count'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:"#FF0052";padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>Active {point.y:.1f} times</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0,
+                    color: "#FF0052"
+                }
+            },
+            series: [{
+                name: 'Hot Words',
+                data: []
+            }]
+        });
+  });
   </script>
 </body>
