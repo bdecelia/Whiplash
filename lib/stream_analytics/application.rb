@@ -83,7 +83,6 @@ module StreamAnalytics
           timestamp: time, count:count
         }
       end
-      
       words = messages
         .map { |m| m[:content].downcase }
         .map { |c| c.split(' ') }.flatten
@@ -119,7 +118,7 @@ module StreamAnalytics
         )
       )
     end
-    
+
     def stopwords
       @_stopwords ||= JSON.parse(File.read("#{Dir.pwd}/lib/stream_analytics/stopwords.json"))
     end
