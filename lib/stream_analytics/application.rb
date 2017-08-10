@@ -21,10 +21,6 @@ module StreamAnalytics
       erb :help
     end
 
-    get '/about' do
-      erb :about
-    end
-
     get '/ping' do
       status 200
       json({ status: 'ok' })
