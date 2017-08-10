@@ -1,66 +1,64 @@
-<body>
-    <div id="user-container" style="height: 100%; width: 100%;"></div>
+<div id="user-container" style="height: 100%; width: 100%;"></div>
 
-    <script type="text/javascript">
-    let chart;
+<script type="text/javascript">
+  let chart;
 
-    window.drawUserGraph = function(data){
-        var user_data = []
-        var count_data = []
-        for(var i = 0; i < 20; i++){
-            user_data.push(data.users[i].content)
-            count_data.push(data.users[i].count)
-        }
-
-        //set chart data
-        chart.xAxis[0].setCategories(user_data);
-        chart.series[0].setData(count_data);
-
-        //reflect new pulled data
-        chart.redraw();
+  window.drawUserGraph = function(data){
+    var user_data = []
+    var count_data = []
+    for(var i = 0; i < 20; i++){
+        user_data.push(data.users[i].content)
+        count_data.push(data.users[i].count)
     }
 
-     //highchart column graph
-       chart =   Highcharts.chart('user-container', {
-            chart: {
-                type: 'column',
-                height: 479
-            },
+    //set chart data
+    chart.xAxis[0].setCategories(user_data);
+    chart.series[0].setData(count_data);
+
+    //reflect new pulled data
+    chart.redraw();
+  }
+
+ //highchart column graph
+   chart =   Highcharts.chart('user-container', {
+        chart: {
+            type: 'column',
+            height: 479
+        },
+        title: {
+            text: 'Top Users'
+        },
+        subtitle: {
+          text: "User count updated every 5 seconds"
+        },
+        xAxis: {
+            categories: [],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
             title: {
-                text: 'Top Users'
-            },
-            subtitle: {
-              text: "User count updated every 5 seconds"
-            },
-            xAxis: {
-                categories: [],
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'User Activity Count'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:""#FF0052";padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>Active {point.y:.1f} times</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0,
-                    color: "#FF0052"
-                }
-            },
-            series: [{
-                name: 'Top Users',
-                data: []
-            }]
-        });
-  </script>
-</body>
+                text: 'User Activity Count'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:""#FF0052";padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>Active {point.y:.1f} times</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0,
+                color: "#FF0052"
+            }
+        },
+        series: [{
+            name: 'Top Users',
+            data: []
+        }]
+    });
+</script>

@@ -1,45 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<%= erb :stream_header %>
+<%= erb :options_overlay %>
 
-    <title>LiveStream Analysis</title>
-
-    <!-- Bootstrap & JQuery -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel = "stylesheet" type = "text/css" href = "/assets/css/style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://code.highcharts.com/stock/highstock.js"></script>
-    <%= erb :ajax_handler %>
-</head>
-
-<body>
-    <!-- Navigation -->
-    <%= erb :navbar %>
-
-    <!-- Main Layout -->
-    <div class="container">
-        <%= erb :stream_header %>
-        <%= erb :options_overlay %>
-        <div id="main_row" class="row">
-            <!-- Graph Container -->
-            <div class="col-sm-6 col-lg-6 col-xl-6">
-                <%= erb :tabs %>
-            </div>
-
-            <!-- Chat Goes Here -->
-            <div class="col-sm-6 col-lg-6 col-xl-6" style="padding-top: 1%;">
-                <%= erb :chat %>
-            </div>
-        </div>
-        <div id="second_row" class="row start_hidden">
-            <div id="stream_container" class="col-sm-6"></div>
-            <%= erb :poll %>
-        </div>
-        
+<div id="main_row" class="row">
+    <!-- Graph Container -->
+    <div class="col-sm-6 col-lg-6 col-xl-6">
+        <%= erb :tabs %>
     </div>
-</body>
-</html>
+
+    <!-- Chat Goes Here -->
+    <div class="col-sm-6 col-lg-6 col-xl-6" style="padding-top: 1%;">
+        <%= erb :chat %>
+    </div>
+</div>
+<div id="second_row" class="row start_hidden">
+    <div id="stream_container" class="col-sm-6"></div>
+    <%= erb :poll %>
+</div>

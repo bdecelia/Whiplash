@@ -1,6 +1,3 @@
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-
 <div id="pie_container" style="height: 100%; width: 100%;"></div>
 
 <script>
@@ -12,6 +9,10 @@
         pieChart.series[0].setData(pieChartData);
         pieChart.redraw();
     }
+
+  Highcharts.setOptions({
+   colors: ['#660024', '#A30039', '#FF0052', '#FF5C95', '#FF99BD']
+  });
 
 pieChart = Highcharts.chart('pie_container', {
     chart: {

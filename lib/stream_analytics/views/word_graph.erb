@@ -1,10 +1,10 @@
 <div id="word-container" style="height: 100%; width: 100%;"></div>
 
 <script type="text/javascript">
-$(document).ready(function () {
-let chart;
+  $(document).ready(function () {
+  let chart;
 
-window.drawWordGraph = function(data){
+  window.drawWordGraph = function(data){
     var word_data = []
     var count_data = []
     for(var i = 0; i < 10; i++){
@@ -18,7 +18,7 @@ window.drawWordGraph = function(data){
 
     //reflect new pulled data
     chart.redraw();
-}
+  }
 
     //highchart column graph
     chart =   Highcharts.chart('word-container', {
@@ -61,5 +61,5 @@ window.drawWordGraph = function(data){
             data: []
         }]
     });
-});
+  });
 </script>

@@ -115,10 +115,12 @@ module StreamAnalytics
     end
 
     def youtube_api(path, params)
+      params = params.merge({ key: api_key })
+
       JSON.parse(
         RestClient.get(
          "https://content.googleapis.com/youtube/v3/#{path}",
-         { params: params.merge({ key: api_key }) }
+         { params: params }
         )
       )
     end

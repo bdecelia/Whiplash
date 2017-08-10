@@ -50,7 +50,7 @@ li {
   background-color: rgb(255, 0, 82);
 }
 
-.navbar-default .navbar-brand, 
+.navbar-default .navbar-brand,
 .navbar-default .navbar-nav>li>a{
     color: white;
 }
@@ -66,7 +66,7 @@ td{
     background:#eee;
 }
 
-.nav-tabs { 
+.nav-tabs {
     border-bottom: 1px solid #ddd;
 }
 .tab-content{
@@ -120,7 +120,7 @@ input{
     width: 50%;
 }
 
- @media only screen and (max-device-width: 736px){ 
+ @media only screen and (max-device-width: 736px){
     input{
         margin-top: 2rem;
         margin-bottom: 1rem;
@@ -131,9 +131,9 @@ input{
         width: 90%;
         margin: auto;
     }
-} 
+}
 
-.start_hidden, 
+.start_hidden,
 #main_row{
     opacity: 0;
 }
