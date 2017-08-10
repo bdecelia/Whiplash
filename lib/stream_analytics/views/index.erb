@@ -23,7 +23,9 @@
     <!-- Main Layout -->
     <div class="container">
         <%= erb :stream_header %>
-        <div class="row">
+        <%= erb :options_overlay %>
+        
+        <div id="main_row" class="row">
             <!-- Graph Container -->
             <div class="col-sm-6 col-lg-6 col-xl-6">
                 <%= erb :tabs %>
@@ -33,19 +35,6 @@
             <div class="col-sm-6 col-lg-6 col-xl-6">
                 <%= erb :chat %>
             </div>
-        </div>
-
-        <div class="row">
-            <!-- Stream Options Menu -->
-            <div class="col-sm-6 col-lg-6 col-xl-6">
-                <%= erb :stream_options %>
-            </div>
-
-            <!-- Poll  -->
-            <div class="col-sm-6 col-lg-6 col-xl-6">
-                <%# erb :poll %>
-            </div>
-
         </div>
     </div>
 </body>

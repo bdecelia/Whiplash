@@ -16,12 +16,8 @@ body{
     border:1px solid #ddd;
 }
 
-input{
-    margin-top: .5rem;
-}
-
 .container{
-    height:100%;
+    height: 100%;
     margin: 2%;
     width:96%;
 }
@@ -78,7 +74,8 @@ td{
 }
 
 #stream_name{
-    font-size: 0.65em;
+    font-size: 2rem;
+    margin-top: 5rem;
 }
 
 .separator{
@@ -86,5 +83,47 @@ td{
 }
 
 h2{
-    margin-bottom: 0.6em;
+    margin-bottom: 0.6rem;
+}
+
+#options_overlay{
+    border: 1px black solid;
+    background-color: #ddd;
+    width: 54%;
+    height: 33vh;
+    margin-top: 10%;
+    margin-left: 24%;
+    position: absolute;
+    z-index: 1;
+}
+
+#options{
+    text-align: center;
+    color: black;
+    margin-left: auto;
+    margin-top: 15%;
+    height: 262px;
+}
+
+input{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    width: 50%;
+}
+
+ @media only screen and (max-device-width: 736px){ 
+    input{
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+    #options_overlay{
+        height: 50vh;
+        width: 100%;
+        margin: auto;
+    }
+} 
+
+#main_row{
+    opacity: 0;
 }
