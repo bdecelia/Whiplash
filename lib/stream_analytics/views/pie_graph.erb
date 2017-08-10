@@ -13,6 +13,10 @@
         pieChart.redraw();
     }
 
+  Highcharts.setOptions({
+   colors: ['#660024', '#A30039', '#FF0052', '#FF5C95', '#FF99BD']
+  });
+
 pieChart = Highcharts.chart('pie_container', {
     chart: {
         plotBackgroundColor: null,
