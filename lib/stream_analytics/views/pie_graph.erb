@@ -18,7 +18,8 @@ pieChart = Highcharts.chart('pie_container', {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        type: 'pie'
+        type: 'pie',
+        height: 479
     },
     title: {
         text: 'Top 5 Answers'
@@ -40,7 +41,7 @@ pieChart = Highcharts.chart('pie_container', {
         }
     },
     series: [{
-        name: 'Brands',
+        name: 'Count',
         colorByPoint: true,
         data: []
     }]
