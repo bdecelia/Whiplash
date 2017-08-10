@@ -10,6 +10,7 @@ module StreamAnalytics
     end
 
     get '/' do
+      $stdout.puts "I AM RENDERING INDEX!"
       erb :index
     end
 
