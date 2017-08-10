@@ -16,8 +16,8 @@
     if(window.liveChatID){
       chatMessages = data.messages;
       for(var i = 0; i < chatMessages.length; i++){
+        //TODO: Date comparison on messages
         $('#chat_body').append('<tr><td>' + chatMessages[i].author +': ' + chatMessages[i].content + '</td></tr>');
-        //console.log(chatMessages[i].author);
       }
       var $el = $(".table-responsive");
       $el.scrollTop($el.prop("scrollHeight")-$el.innerHeight());

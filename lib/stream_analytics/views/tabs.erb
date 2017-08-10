@@ -3,12 +3,10 @@
   <li class="active"><a data-toggle="tab" href="#home">Hot Words</a></li>
   <li><a data-toggle="tab" href="#menu1">Top Users</a></li>
   <li><a data-toggle="tab" href="#menu2">Chat Activity</a></li>
-  <li><a data-toggle="tab" href="#menu3">Poll</a></li>
 </ul>
 
 <div class="tab-content">
   <div id="home" class="tab-pane fade in active"> <%= erb :word_graph %> </div>
   <div id="menu1" class="tab-pane fade"> <%= erb :user_graph %> </div>
   <div id="menu2" class="tab-pane fade"> <%= erb :comment_graph %> </div>
-  <div id="menu3" class="tab-pane fade"> <%# erb :word_search %> </div>
 </div>
