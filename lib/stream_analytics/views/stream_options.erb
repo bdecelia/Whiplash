@@ -14,18 +14,20 @@
 
 <script type='text/javascript'>
     $("#menu1_form").submit(function(e) {
-    e.preventDefault(); // avoid to execute the actual submit of the form.
-    $.ajax({
-           type: "POST",
-           url: "/video",
-           data: $("#menu1_form").serialize(),
-           success: function(data){  // TODO: clean up vars
-               window.streamData = data;
-               window.channelName = data["channel_name"];
-               window.streamName = data["stream_name"];
-               window.liveChatID = data["live_chat_id"]; 
-               loadStreamHeader();
-               }
-         });
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        $.ajax({
+            type: "POST",
+            url: "/video",
+            data: $("#menu1_form").serialize(),
+            success: function(data){  // TODO: clean up vars
+                window.streamData = data;
+                window.channelName = data["channel_name"];
+                window.streamName = data["stream_name"];
+                window.liveChatID = data["live_chat_id"]; 
+                loadStreamHeader();
+                getStreamData();
+                }
+            });
+        
     });
 </script>

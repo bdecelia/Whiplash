@@ -5,7 +5,7 @@
     $(document).ready(function () {
     let chart;
 
-    function drawWordGraph(data){
+    window.drawWordGraph = function(data){
         var word_data = []
         var count_data = []
         for(var i = 0; i < 10; i++){
@@ -21,22 +21,12 @@
         chart.redraw();
     }
 
-    function refreshWordGraph(){
-        if( window.liveChatID){
-            $.ajax({
-                url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
-                success: function(data){ drawWordGraph(data); }
-            })
-        }
-        setTimeout(refreshWordGraph, 5000); //  call again after 5 second
-    }
-
      //highchart column graph
        chart =   Highcharts.chart('word-container', {
             chart: {
                 type: 'column',
                 events: {
-                  load: refreshWordGraph
+                  load: getStreamData
                 }
             },
             title: {

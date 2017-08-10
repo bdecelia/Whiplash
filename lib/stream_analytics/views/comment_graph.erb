@@ -6,7 +6,7 @@
     var chart;
     var dates = []
 
-  function drawCommentGraph(data){
+  window.drawCommentGraph = function(data){
     var commentRate = data.comments_per_s
     //target data entry point in chart
     var series = chart.series[0];
@@ -27,22 +27,12 @@
     }
   }
 
-  function requestData(){
-    if( window.liveChatID){
-      $.ajax({
-        url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
-        success: function(data){ drawCommentGraph(data); }
-      })
-    }
-    setTimeout(requestData, 10000); //  call again after 10 second
-  }
-
       chart = new Highcharts.Chart({
           chart: {
               renderTo: 'comment-container',
               defaultSeriesType: 'spline',
               events: {
-                  load: requestData
+                  load: getStreamData
               }
           },
           title: {

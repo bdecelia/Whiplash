@@ -4,7 +4,7 @@
     <script type="text/javascript">
     let chart;
 
-    function drawUserGraph(data){
+    window.drawUserGraph = function(data){
         var user_data = []
         var count_data = []
         for(var i = 0; i < 20; i++){
@@ -20,22 +20,12 @@
         chart.redraw();
     }
 
-    function refreshUserGraph(){
-        if( window.liveChatID){
-            $.ajax({
-                url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
-                success: function(data){ drawUserGraph(data); }
-            })
-        }
-        setTimeout(refreshUserGraph, 5000); //  call again after 5 second
-    }
-
      //highchart column graph
        chart =   Highcharts.chart('user-container', {
             chart: {
                 type: 'column',
                 events: {
-                  load: refreshUserGraph
+                  load: getStreamData
                 }
             },
             title: {
