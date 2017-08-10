@@ -7,13 +7,9 @@ module StreamAnalytics
   class Application < Sinatra::Application
     configure do
       Dotenv.load
-
-      puts "YOUTUBE_API_KEY: #{ENV['YOUTUBE_API_KEY']}"
     end
 
     get '/' do
-      $stdout.puts "I AM RENDERING INDEX!"
-      $stdout.puts "YOUTUBE_API_KEY: #{ENV['YOUTUBE_API_KEY']}"
       erb :index
     end
 
@@ -120,7 +116,6 @@ module StreamAnalytics
 
     def youtube_api(path, params)
       params = params.merge({ key: api_key })
-      $stdout.puts "params: #{params.to_json}"
 
       JSON.parse(
         RestClient.get(
