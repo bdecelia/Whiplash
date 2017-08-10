@@ -1,0 +1,28 @@
+<script>
+    function drawGraphs(){
+        drawWordGraph(window.streamData);
+        drawUserGraph(window.streamData);
+        drawCommentGraph(window.streamData);
+        drawChatBox(window.streamData);
+        drawPieChart(window.streamData);
+        drawPoll(window.streamData);
+    }
+
+    function getStreamData(){
+        if(window.liveChatID){
+            $.ajax({
+                url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
+                success: function(data){ 
+                    window.streamData = data;
+                    drawGraphs(); 
+                }
+            })
+        }
+        setTimeout(getStreamData, 5000); //  call again after 5 second
+    }
+
+    window.displayStream = function(){
+        $("#stream_container").append("<iframe width='100%' height='480' src='https://www.youtube.com/embed/" + window.videoID + "' frameborder='0'></iframe>");
+    }
+
+</script>

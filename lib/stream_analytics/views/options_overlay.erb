@@ -1,0 +1,41 @@
+<div id="options_overlay" class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <div id="options" class="container">
+            <h4>Please enter a LiveStream ID below:</h4>
+            <form id="menu1_form">
+                <input id="stream_input" name="id">
+                <button style="background-color:white;" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript'>
+    window.removeOverlay = function(){
+        $('#options_overlay').fadeOut(100); 
+        $('#main_row').css("opacity","1");
+        $('.start_hidden').css("opacity","1");
+        $('.container').css("background-color","rgba(252,252,252,0.50)");
+    }
+
+    $("#menu1_form").submit(function(e) {
+        window.videoID = $("#menu1_form").serialize().substring(3);
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        $.ajax({
+            type: "POST",
+            url: "/video",
+            data: $("#menu1_form").serialize(),
+            success: function(data){  // TODO: clean up vars
+                window.streamData = data;
+                window.channelName = data["channel_name"];
+                window.streamName = data["stream_name"];
+                window.liveChatID = data["live_chat_id"]; 
+                getStreamData();
+                loadStreamHeader();
+                removeOverlay();
+                displayStream();
+                }
+            });
+    });
+</script>

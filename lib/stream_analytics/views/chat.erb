@@ -1,20 +1,26 @@
-<h2>Live Chat</h2>
+<h2 style="margin-bottom:2rem;">Live Chat</h2>
 
 <div id="chat_container" class="table-responsive">
-  <table class="table table-bordered table-hover">
+  <table id="chat_table" class="table table-bordered table-hover">
     <thead>
       <tr><th> -- Chat Start -- </th></tr>
     </thead>
-    <tbody>
-    <%# TODO: create @messages, have it auto-refresh %>
-    <% (1..100).each do |num| %>
-      <tr><td id=<%="row_#{num}"%>> Test Message </td> </tr>
-    <% end %>
+    <tbody id="chat_body">
+      <tr><td> No Messages Yet! </td></tr>
     </tbody>
   </table>
 </div>
 
-<script> 
-    var $el = $(".table-responsive");
-    $el.scrollTop($el.prop("scrollHeight")-$el.innerHeight());
+<script>
+  window.drawChatBox = function(data){
+    if(window.liveChatID){
+      chatMessages = data.messages;
+      for(var i = 0; i < chatMessages.length; i++){
+        //TODO: Date comparison on messages
+        $('#chat_body').append('<tr><td>' + chatMessages[i].author +': ' + chatMessages[i].content + '</td></tr>');
+      }
+      var $el = $(".table-responsive");
+      $el.scrollTop($el.prop("scrollHeight")-$el.innerHeight());
+    }
+  }
 </script>

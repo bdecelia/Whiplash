@@ -1,36 +1,30 @@
 <body>
-    <div id="user-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <div id="user-container" style="height: 100%; width: 100%;"></div>
 
     <script type="text/javascript">
     let chart;
 
-    //retrieve data
-    setInterval(function refreshDiv(){
-        $.ajax({
-           url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
-           success: function(data) {
-             var user_data = []
-             var count_data = []
-             for(var i = 0; i < 20; i++){
-               user_data.push(data.users[i].content)
-               count_data.push(data.users[i].count)
-             }
+    window.drawUserGraph = function(data){
+        var user_data = []
+        var count_data = []
+        for(var i = 0; i < 20; i++){
+            user_data.push(data.users[i].content)
+            count_data.push(data.users[i].count)
+        }
 
-             //set chart data
-             chart.xAxis[0].setCategories(user_data);
-             chart.series[0].setData(count_data);
+        //set chart data
+        chart.xAxis[0].setCategories(user_data);
+        chart.series[0].setData(count_data);
 
-             //reflect new pulled data
-             chart.redraw();
-           }
-       })
-    }, 5000);
-
+        //reflect new pulled data
+        chart.redraw();
+    }
 
      //highchart column graph
        chart =   Highcharts.chart('user-container', {
             chart: {
-                type: 'column'
+                type: 'column',
+                height: 479
             },
             title: {
                 text: 'Top Users'
