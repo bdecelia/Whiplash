@@ -11,7 +11,7 @@
     function getStreamData(){
         if(window.liveChatID){
             $.ajax({
-                url: 'http://localhost/analytics?live_chat_id=' + window.liveChatID,
+                url: '/analytics?live_chat_id=' + window.liveChatID,
                 success: function(data){
                     window.streamData = data;
                     drawGraphs();
