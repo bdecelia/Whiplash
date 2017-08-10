@@ -119,11 +119,16 @@ input{
     }
     #options_overlay{
         height: 50vh;
-        width: 100%;
+        width: 90%;
         margin: auto;
     }
 } 
 
+.start_hidden, 
 #main_row{
     opacity: 0;
+}
+
+#stream_container{
+    margin-top: 2%;
 }

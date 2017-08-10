@@ -14,9 +14,11 @@
     window.removeOverlay = function(){
         $('#options_overlay').fadeOut(100); 
         $('#main_row').css("opacity","1");
+        $('.start_hidden').css("opacity","1");
     }
 
     $("#menu1_form").submit(function(e) {
+        window.videoID = $("#menu1_form").serialize().substring(3);
         e.preventDefault(); // avoid to execute the actual submit of the form.
         $.ajax({
             type: "POST",
@@ -30,6 +32,7 @@
                 getStreamData();
                 loadStreamHeader();
                 removeOverlay();
+                displayStream();
                 }
             });
     });
