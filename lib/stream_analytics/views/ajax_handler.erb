@@ -11,10 +11,10 @@
     function getStreamData(){
         if(window.liveChatID){
             $.ajax({
-                url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
-                success: function(data){ 
+                url: 'http://localhost/analytics?live_chat_id=' + window.liveChatID,
+                success: function(data){
                     window.streamData = data;
-                    drawGraphs(); 
+                    drawGraphs();
                 }
             })
         }
