@@ -14,10 +14,12 @@ body{
     max-height: 475px;
     width: auto;
     overflow-y: auto;
+    margin-top: 2%; 
     border:1px solid #ddd;
 }
 
 .container{
+    border-radius: 36px;
     height: 100%;
     margin: 2%;
     width:96%;
@@ -50,7 +52,7 @@ li {
 
 .navbar-default .navbar-brand, 
 .navbar-default .navbar-nav>li>a{
-    color: black;
+    color: white;
 }
 
 .table{
@@ -151,4 +153,8 @@ input{
     width: 100%;
     margin-top: 4%;
     padding-top: 4%;
+}
+
+a{
+    color: black;
 }
