@@ -13,6 +13,7 @@ module StreamAnalytics
 
     get '/' do
       $stdout.puts "I AM RENDERING INDEX!"
+      $stdout.puts "YOUTUBE_API_KEY: #{ENV['YOUTUBE_API_KEY']}"
       erb :index
     end
 
