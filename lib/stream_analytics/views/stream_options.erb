@@ -23,7 +23,9 @@
                window.streamData = data;
                window.channelName = data["channel_name"];
                window.streamName = data["stream_name"];
-               window.liveChatID = data["live_chat_id"]; }
+               window.liveChatID = data["live_chat_id"]; 
+               loadStreamHeader();
+               }
          });
     });
 </script>

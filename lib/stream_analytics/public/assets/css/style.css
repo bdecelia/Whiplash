@@ -72,3 +72,19 @@ td{
     border: 1px solid #ddd;
     border-top: 0px solid #ddd;
 }
+
+#stream_header{
+    text-align: center;
+}
+
+#stream_name{
+    font-size: 0.65em;
+}
+
+.separator{
+    border-top: 3px solid rgb(255, 0, 82);
+}
+
+h2{
+    margin-bottom: 0.6em;
+}
