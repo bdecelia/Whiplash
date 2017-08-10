@@ -35,12 +35,12 @@ module StreamAnalytics
       messages = []
       api_params = { liveChatId: params[:live_chat_id], part: 'id, snippet, authorDetails' }
 
-      loop do
-        break if page_count == 5
+      # loop do
+        # break if page_count == 5
 
-        if next_page_token && !next_page_token.empty?
-          api_params[:pageToken] = next_page_token
-        end
+        # if next_page_token && !next_page_token.empty?
+        #   api_params[:pageToken] = next_page_token
+        # end
 
         messages_api = youtube_api('liveChat/messages', api_params)
         break if messages_api['pageInfo']['totalResults'] == 0
@@ -52,16 +52,16 @@ module StreamAnalytics
           }
         end.concat(messages)
 
-        next_page_token = messages_api['nextPageToken']
-        break if !next_page_token || next_page_token.empty?
-        puts "NPT: #{next_page_token}"
+      #   next_page_token = messages_api['nextPageToken']
+      #   break if !next_page_token || next_page_token.empty?
+      #   puts "NPT: #{next_page_token}"
 
-        puts "ENTERING SLEEP #{messages_api['pollingIntervalMillis']}"
-        sleep (messages_api['pollingIntervalMillis'] / 100)
-        puts "EXITING SLEEP"
+      #   puts "ENTERING SLEEP #{messages_api['pollingIntervalMillis']}"
+      #   sleep (messages_api['pollingIntervalMillis'] / 100)
+      #   puts "EXITING SLEEP"
 
-        page_count += 1
-      end
+      #   page_count += 1
+      # end
 
       users = messages.each_with_object(Hash.new(0)) do |message, counter|
         counter[message[:author]] += 1

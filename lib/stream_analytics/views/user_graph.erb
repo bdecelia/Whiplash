@@ -4,33 +4,39 @@
     <script type="text/javascript">
     let chart;
 
-    //retrieve data
-    setInterval(function refreshDiv(){
-        $.ajax({
-           url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
-           success: function(data) {
-             var user_data = []
-             var count_data = []
-             for(var i = 0; i < 20; i++){
-               user_data.push(data.users[i].content)
-               count_data.push(data.users[i].count)
-             }
+    function drawUserGraph(data){
+        var user_data = []
+        var count_data = []
+        for(var i = 0; i < 20; i++){
+            user_data.push(data.users[i].content)
+            count_data.push(data.users[i].count)
+        }
 
-             //set chart data
-             chart.xAxis[0].setCategories(user_data);
-             chart.series[0].setData(count_data);
+        //set chart data
+        chart.xAxis[0].setCategories(user_data);
+        chart.series[0].setData(count_data);
 
-             //reflect new pulled data
-             chart.redraw();
-           }
-       })
-    }, 5000);
+        //reflect new pulled data
+        chart.redraw();
+    }
 
+    function refreshUserGraph(){
+        if( window.liveChatID){
+            $.ajax({
+                url: 'http://localhost:3000/analytics?live_chat_id=' + window.liveChatID,
+                success: function(data){ drawUserGraph(data); }
+            })
+        }
+        setTimeout(refreshUserGraph, 5000); //  call again after 5 second
+    }
 
      //highchart column graph
        chart =   Highcharts.chart('user-container', {
             chart: {
-                type: 'column'
+                type: 'column',
+                events: {
+                  load: refreshUserGraph
+                }
             },
             title: {
                 text: 'Top Users'
