@@ -7,6 +7,8 @@ module StreamAnalytics
   class Application < Sinatra::Application
     configure do
       Dotenv.load
+
+      puts "YOUTUBE_API_KEY: #{ENV['YOUTUBE_API_KEY']}"
     end
 
     get '/' do
