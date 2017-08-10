@@ -27,7 +27,7 @@ body{
 }
 
 li {
-  list-style-type: none;
+  /* list-style-type: disc; */
 }
 
 @font-face {
@@ -67,6 +67,7 @@ td{
 .tab-content{
     border: 1px solid #ddd;
     border-top: 0px solid #ddd;
+    height: 480px;
 }
 
 #stream_header{
@@ -87,12 +88,12 @@ h2{
 }
 
 #options_overlay{
-    border: 1px black solid;
-    background-color: #ddd;
-    width: 54%;
+    /* border: 1px black solid; */
+    /* background-color: #ddd; */
+    width: 96%;
     height: 33vh;
     margin-top: 10%;
-    margin-left: 24%;
+    /* margin-left: auto; */
     position: absolute;
     z-index: 1;
 }
@@ -100,9 +101,12 @@ h2{
 #options{
     text-align: center;
     color: black;
-    margin-left: auto;
-    margin-top: 15%;
-    height: 262px;
+    /* margin-left: auto; */
+    /* margin-top: 12%; */
+    padding-top: 15%;
+    height: 480px;
+    border: 1px black solid;
+    background-color: #ddd;
 }
 
 input{
@@ -129,6 +133,19 @@ input{
     opacity: 0;
 }
 
-#stream_container{
+#second_row{
     margin-top: 2%;
+}
+
+.tab-pane{
+    height:100%;
+}
+
+#help_box{
+    background-color:rgba(255, 0, 82,0.1);
+    text-align: center;
+    height: 75vh;
+    width: 100%;
+    margin-top: 4%;
+    padding-top: 4%;
 }

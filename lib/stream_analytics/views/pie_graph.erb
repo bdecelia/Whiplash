@@ -1,23 +1,19 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-
-<div class="col-sm-6">
-    <div id="poll_container" style="height: 480px; width: 100%;"></div>
-</div>
-
+<div id="pie_container" style="height: 100%; width: 100%;"></div>
 
 <script>
-    window.drawPoll = function(data){
-        pollingData = [];
+    window.drawPieChart = function(data){
+        pieChartData = [];
         for(var i = 0; i < 5; i++){
-            pollingData.push({ "name": data.words[i].content, "y": data.words[i].count });
+            pieChartData.push({ "name": data.words[i].content, "y": data.words[i].count });
         }
-        poll.series[0].setData(pollingData);
-        poll.redraw();
+        pieChart.series[0].setData(pieChartData);
+        pieChart.redraw();
     }
 
-poll = Highcharts.chart('poll_container', {
+pieChart = Highcharts.chart('pie_container', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
