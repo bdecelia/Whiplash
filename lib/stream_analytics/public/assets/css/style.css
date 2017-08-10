@@ -85,6 +85,7 @@ td{
 }
 
 .separator{
+    width: 50%;
     border-top: 3px solid rgb(255, 0, 82);
 }
 
@@ -97,7 +98,7 @@ h2{
     /* background-color: #ddd; */
     width: 96%;
     height: 33vh;
-    margin-top: 10%;
+    margin-top: 2%;
     /* margin-left: auto; */
     position: absolute;
     z-index: 1;
@@ -105,11 +106,12 @@ h2{
 
 #options{
     text-align: center;
+    margin-left: 0px;
     color: black;
     /* margin-left: auto; */
-    /* margin-top: 12%; */
-    padding-top: 15%;
-    height: 480px;
+    margin-top: 0;
+    padding-top: 10%;
+    height: 300px;
     border: 1px black solid;
     background-color: #ddd;
 }
